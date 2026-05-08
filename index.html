@@ -1,0 +1,1758 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Andres Suarez Profesional</title>
+  <link href="https://cdn.jsdelivr.net/npm/inter-ui@4.1.0/inter.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #111118;
+      --bg-card: #16161f;
+      --bg-card-hover: #1c1c28;
+      --text-primary: #f0f0f5;
+      --text-secondary: #9898a8;
+      --text-muted: #5a5a6e;
+      --border: #22222e;
+      --accent: #c9a84c;
+      --accent-hover: #dbb85c;
+      --accent-subtle: rgba(201,168,76,0.08);
+      --blue: #3d5a99;
+      --blue-light: #4a6bb5;
+      --green: #2ea86f;
+      --red: #e54d4d;
+      --card-radius: 4px;
+      --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-primary); color: var(--text-primary);
+      line-height: 1.5; -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 64px; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; background: rgba(10,10,15,0.95);
+      backdrop-filter: blur(20px); z-index: 100;
+    }
+    .logo { display: flex; align-items: center; gap: 14px; cursor: pointer; text-decoration: none; }
+    .logo-mark {
+      width: 32px; height: 32px; background: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800; color: #0a0a0f; letter-spacing: -0.5px;
+    }
+    .logo-text { font-size: 15px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text-primary); }
+    .logo-text span { color: var(--accent); font-weight: 300; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a {
+      font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--text-secondary); text-decoration: none; transition: color var(--transition); position: relative; cursor: pointer;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+      background: var(--accent); transition: width var(--transition);
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .header-actions { display: flex; align-items: center; gap: 20px; }
+    .header-actions button {
+      background: none; border: none; cursor: pointer; color: var(--text-secondary);
+      display: flex; align-items: center; gap: 6px; transition: color var(--transition); position: relative;
+    }
+    .header-actions button:hover { color: var(--text-primary); }
+    .icon-svg { width: 18px; height: 18px; }
+    .cart-count {
+      background: var(--accent); color: #0a0a0f; font-size: 10px; font-weight: 700;
+      padding: 1px 5px; border-radius: 2px; min-width: 16px; text-align: center;
+    }
+
+    /* ── VIEWS ── */
+    .view { display: none; }
+    .view.active { display: block; }
+
+    /* ── HERO ── */
+    .hero { position: relative; overflow: hidden; padding: 100px 40px 80px; text-align: center; background: var(--bg-primary); }
+    .hero::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(61,90,153,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-label {
+      display: inline-block; font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 3px; color: var(--accent); margin-bottom: 24px; position: relative;
+    }
+    .hero h1 {
+      font-size: 48px; font-weight: 200; letter-spacing: -1px; line-height: 1.15;
+      margin-bottom: 20px; position: relative; color: var(--text-primary);
+    }
+    .hero h1 strong { font-weight: 700; }
+    .hero p { font-size: 15px; color: var(--text-secondary); max-width: 480px; margin: 0 auto; position: relative; line-height: 1.7; }
+    .hero-divider { width: 40px; height: 1px; background: var(--accent); margin: 32px auto 0; position: relative; }
+
+    /* ── CATEGORIES ── */
+    .categories { display: flex; justify-content: center; gap: 0; border-bottom: 1px solid var(--border); }
+    .cat-btn {
+      padding: 16px 28px; border: none; background: transparent;
+      font-size: 11px; font-weight: 600; cursor: pointer; transition: all var(--transition);
+      color: var(--text-muted); font-family: inherit; text-transform: uppercase; letter-spacing: 1.5px; position: relative;
+    }
+    .cat-btn::after {
+      content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 0; height: 2px; background: var(--accent); transition: width var(--transition);
+    }
+    .cat-btn:hover { color: var(--text-secondary); }
+    .cat-btn.active { color: var(--text-primary); }
+    .cat-btn.active::after { width: 100%; }
+
+    /* ── PRODUCT GRID ── */
+    .products-section { padding: 48px 40px 64px; max-width: 1200px; margin: 0 auto; }
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+    .section-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--text-secondary); }
+    .product-count { font-size: 12px; color: var(--text-muted); }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .product-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--card-radius);
+      overflow: hidden; transition: all var(--transition); cursor: pointer; position: relative;
+    }
+    .product-card:hover {
+      background: var(--bg-card-hover); border-color: #2a2a38;
+      transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .product-image {
+      width: 100%; aspect-ratio: 16/10;
+      display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;
+    }
+    .product-image .box-art {
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      padding: 32px; position: relative;
+    }
+    .box-inner {
+      width: 100%; height: 100%; border: 1px solid rgba(255,255,255,0.06);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 10px; padding: 24px; position: relative; overflow: hidden;
+    }
+    .box-inner::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--glow-color, rgba(201,168,76,0.3)), transparent);
+    }
+    .box-inner::after {
+      content: ''; position: absolute; top: -30px; right: -30px; width: 100px; height: 100px;
+      border-radius: 50%; background: var(--glow-color, rgba(201,168,76,0.15));
+      filter: blur(40px); pointer-events: none;
+    }
+    .box-title {
+      font-size: 22px; font-weight: 700; color: #fff; text-align: center;
+      letter-spacing: -0.5px; line-height: 1.2; position: relative;
+    }
+    .box-subtitle { font-size: 10px; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 2px; position: relative; }
+    .box-badge-corner { position: absolute; bottom: 10px; right: 10px; font-size: 9px; font-weight: 600; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
+    .badge {
+      position: absolute; top: 12px; left: 12px; padding: 4px 10px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; z-index: 2;
+    }
+    .badge-sale { background: var(--accent); color: #0a0a0f; }
+    .badge-free { background: var(--green); color: #fff; }
+    .badge-new { background: var(--blue-light); color: #fff; }
+    .product-info { padding: 18px 20px 22px; }
+    .product-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; letter-spacing: -0.2px; }
+    .product-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.6; }
+    .product-price { display: flex; align-items: center; gap: 10px; }
+    .price-current { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+    .price-old { font-size: 13px; color: var(--text-muted); text-decoration: line-through; }
+
+    /* ── FEATURES BAR ── */
+    .features-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .feature-item { padding: 32px 24px; text-align: center; border-right: 1px solid var(--border); }
+    .feature-item:last-child { border-right: none; }
+    .feature-icon { font-size: 24px; margin-bottom: 12px; }
+    .feature-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px; color: var(--text-primary); }
+    .feature-desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+
+    /* ── NEWSLETTER ── */
+    .newsletter { text-align: center; padding: 80px 40px; position: relative; }
+    .newsletter::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(201,168,76,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .newsletter-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); margin-bottom: 16px; display: block; position: relative; }
+    .newsletter h2 { font-size: 28px; font-weight: 200; margin-bottom: 8px; letter-spacing: -0.5px; position: relative; }
+    .newsletter h2 strong { font-weight: 600; }
+    .newsletter p { color: var(--text-muted); font-size: 13px; margin-bottom: 32px; position: relative; }
+    .newsletter-form { display: flex; max-width: 440px; margin: 0 auto; gap: 0; position: relative; }
+    .newsletter-form input {
+      flex: 1; padding: 14px 18px; border: 1px solid var(--border); border-right: none;
+      background: var(--bg-secondary); color: var(--text-primary); font-size: 13px; font-family: inherit; outline: none;
+      transition: border-color var(--transition);
+    }
+    .newsletter-form input::placeholder { color: var(--text-muted); }
+    .newsletter-form input:focus { border-color: var(--accent); }
+    .newsletter-form button {
+      padding: 14px 28px; background: var(--accent); color: #0a0a0f;
+      border: 1px solid var(--accent); cursor: pointer;
+      font-size: 11px; font-weight: 700; font-family: inherit; text-transform: uppercase; letter-spacing: 2px;
+      transition: background var(--transition);
+    }
+    .newsletter-form button:hover { background: var(--accent-hover); }
+
+    /* ── FOOTER ── */
+    .footer { border-top: 1px solid var(--border); padding: 40px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; }
+    .footer-brand { display: flex; flex-direction: column; gap: 8px; }
+    .footer-brand-name { font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
+    .footer-brand-desc { font-size: 11px; color: var(--text-muted); max-width: 280px; line-height: 1.6; }
+    .footer-links { display: flex; gap: 32px; }
+    .footer-links a { font-size: 11px; color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { text-align: center; padding-top: 24px; margin-top: 24px; border-top: 1px solid var(--border); max-width: 1200px; margin-left: auto; margin-right: auto; }
+    .footer-copy span { font-size: 10px; color: var(--text-muted); letter-spacing: 1px; }
+
+    /* ── MODAL (Product Detail) ── */
+    .modal-overlay {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;
+      padding: 20px; backdrop-filter: blur(8px);
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--card-radius);
+      max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    }
+    .modal-image {
+      width: 100%; aspect-ratio: 16/9; background: var(--bg-card);
+      display: flex; align-items: center; justify-content: center; position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-close {
+      position: absolute; top: 12px; right: 12px; width: 32px; height: 32px;
+      background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); color: #fff;
+      font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition);
+    }
+    .modal-close:hover { background: rgba(0,0,0,0.8); }
+    .modal-body { padding: 28px; }
+    .modal-body h2 { font-size: 22px; font-weight: 600; margin-bottom: 4px; letter-spacing: -0.3px; }
+    .modal-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); margin-bottom: 16px; display: block; }
+    .modal-body .modal-desc { color: var(--text-secondary); font-size: 14px; margin-bottom: 24px; line-height: 1.7; }
+    .modal-features { list-style: none; margin-bottom: 28px; padding: 20px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); }
+    .modal-features li { padding: 7px 0; font-size: 13px; display: flex; align-items: center; gap: 10px; color: var(--text-secondary); }
+    .modal-features li::before { content: '✓'; color: var(--accent); font-weight: 700; font-size: 12px; }
+    .modal-features li + li { border-top: 1px solid var(--border); }
+    .modal-price-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .modal-price-row .price-current { font-size: 26px; font-weight: 600; }
+    .modal-price-row .price-old { font-size: 16px; }
+    .btn-primary {
+      width: 100%; padding: 16px; background: var(--accent); color: #0a0a0f;
+      border: none; font-size: 12px; font-weight: 700; cursor: pointer;
+      transition: background var(--transition); font-family: inherit; text-transform: uppercase; letter-spacing: 2px;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-primary.free { background: var(--green); color: #fff; }
+    .btn-primary.free:hover { background: #34c47e; }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── CART / CHECKOUT VIEW ── */
+    .checkout-page { max-width: 1100px; margin: 0 auto; padding: 48px 40px 80px; }
+    .checkout-page h1 { font-size: 28px; font-weight: 200; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .checkout-page h1 strong { font-weight: 700; }
+    .checkout-back {
+      display: inline-flex; align-items: center; gap: 8px; color: var(--accent); text-decoration: none;
+      font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;
+      margin-bottom: 32px; cursor: pointer; transition: color var(--transition); border: none; background: none; font-family: inherit;
+    }
+    .checkout-back:hover { color: var(--accent-hover); }
+    .checkout-layout { display: grid; grid-template-columns: 1fr 420px; gap: 40px; }
+    .checkout-divider { width: 100%; height: 1px; background: var(--border); margin: 24px 0; }
+
+    /* Cart Items */
+    .cart-item {
+      display: flex; gap: 16px; padding: 20px 0;
+      border-bottom: 1px solid var(--border); align-items: center;
+    }
+    .cart-item-img {
+      width: 80px; height: 56px; background: linear-gradient(145deg, #0d0d14, #161620);
+      border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; overflow: hidden;
+    }
+    .cart-item-img span { font-size: 10px; color: var(--text-muted); text-align: center; letter-spacing: 1px; text-transform: uppercase; }
+    .cart-item-info { flex: 1; }
+    .cart-item-name { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+    .cart-item-cat { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+    .cart-item-price { font-size: 15px; font-weight: 600; white-space: nowrap; }
+    .cart-item-remove {
+      background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 16px;
+      padding: 4px 8px; transition: color var(--transition);
+    }
+    .cart-item-remove:hover { color: var(--red); }
+    .cart-empty { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+    .cart-empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.3; }
+    .cart-empty h3 { font-size: 16px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; }
+    .cart-empty p { font-size: 13px; }
+
+    /* Billing Form */
+    .billing-section h3 {
+      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
+      color: var(--text-secondary); margin-bottom: 20px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .form-row.full { grid-template-columns: 1fr; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label {
+      font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 12px 14px; background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--text-primary); font-size: 13px; font-family: inherit; outline: none;
+      transition: border-color var(--transition); border-radius: var(--card-radius);
+    }
+    .form-group textarea { resize: vertical; min-height: 60px; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-muted); }
+    .form-group select { cursor: pointer; }
+    .form-group select option { background: var(--bg-card); color: var(--text-primary); }
+
+    /* Order Summary */
+    .order-summary {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--card-radius);
+      padding: 28px; position: sticky; top: 88px;
+    }
+    .order-summary h3 {
+      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
+      color: var(--text-secondary); margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+    }
+    .summary-item { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 13px; }
+    .summary-item .name { color: var(--text-secondary); }
+    .summary-item .val { font-weight: 600; }
+    .summary-divider { height: 1px; background: var(--border); margin: 16px 0; }
+    .summary-total { display: flex; justify-content: space-between; font-size: 18px; font-weight: 600; margin-bottom: 24px; }
+    .summary-total .val { color: var(--accent); }
+    .payment-methods { margin-bottom: 24px; }
+    .payment-methods h4 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 12px; }
+    .payment-option {
+      display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+      border: 1px solid var(--border); margin-bottom: 8px; cursor: pointer;
+      transition: all var(--transition); border-radius: var(--card-radius);
+    }
+    .payment-option:hover { border-color: #2a2a38; }
+    .payment-option.selected { border-color: var(--accent); background: var(--accent-subtle); }
+    .payment-option.disabled { opacity: 0.4; cursor: not-allowed; }
+    .payment-radio {
+      width: 16px; height: 16px; border: 2px solid var(--text-muted); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .payment-option.selected .payment-radio { border-color: var(--accent); }
+    .payment-option.selected .payment-radio::after {
+      content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%;
+    }
+    .payment-label { font-size: 13px; font-weight: 500; }
+    .payment-desc { font-size: 11px; color: var(--text-muted); }
+    .payment-status { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 2px 6px; border-radius: 2px; margin-left: auto; }
+    .payment-status.configured { background: rgba(46,168,111,0.15); color: var(--green); }
+    .payment-status.pending { background: rgba(201,168,76,0.15); color: var(--accent); }
+    .secure-badge {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-top: 16px; font-size: 11px; color: var(--text-muted); letter-spacing: 0.5px;
+    }
+
+    /* Payment Processing Area */
+    #paymentProcessingArea {
+      margin-top: 16px; padding: 20px; border: 1px solid var(--border);
+      border-radius: var(--card-radius); background: var(--bg-secondary); min-height: 60px;
+    }
+    #paymentProcessingArea:empty { display: none; }
+    .stripe-btn, .yappy-btn {
+      width: 100%; padding: 16px; border: none; font-size: 13px; font-weight: 700;
+      cursor: pointer; font-family: inherit; text-transform: uppercase; letter-spacing: 2px;
+      border-radius: var(--card-radius); transition: all var(--transition);
+    }
+    .stripe-btn { background: #635bff; color: #fff; }
+    .stripe-btn:hover { background: #7a73ff; }
+    .yappy-btn { background: #00d26a; color: #fff; }
+    .yappy-btn:hover { background: #00e676; }
+    .paypal-container { min-height: 50px; }
+    .payment-info-box {
+      padding: 14px; background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.15);
+      border-radius: var(--card-radius); font-size: 12px; color: var(--text-secondary); line-height: 1.6;
+    }
+    .payment-info-box strong { color: var(--accent); }
+
+    /* ── ADMIN PANEL ── */
+    .admin-page { max-width: 1100px; margin: 0 auto; padding: 48px 40px 80px; }
+    .admin-page h1 { font-size: 28px; font-weight: 200; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .admin-page h1 strong { font-weight: 700; }
+    .admin-subtitle { font-size: 13px; color: var(--text-muted); margin-bottom: 32px; }
+    .admin-toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
+    }
+    .admin-search {
+      padding: 10px 16px; background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--text-primary); font-size: 13px; font-family: inherit; outline: none;
+      width: 280px; border-radius: var(--card-radius); transition: border-color var(--transition);
+    }
+    .admin-search:focus { border-color: var(--accent); }
+    .admin-search::placeholder { color: var(--text-muted); }
+    .btn-admin {
+      padding: 10px 20px; background: var(--accent); color: #0a0a0f; border: none;
+      font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit;
+      text-transform: uppercase; letter-spacing: 1.5px; transition: background var(--transition);
+      border-radius: var(--card-radius);
+    }
+    .btn-admin:hover { background: var(--accent-hover); }
+    .btn-admin-outline {
+      padding: 10px 20px; background: transparent; color: var(--text-secondary);
+      border: 1px solid var(--border); font-size: 11px; font-weight: 600;
+      cursor: pointer; font-family: inherit; text-transform: uppercase; letter-spacing: 1.5px;
+      transition: all var(--transition); border-radius: var(--card-radius);
+    }
+    .btn-admin-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Admin Table */
+    .admin-table { width: 100%; border-collapse: collapse; }
+    .admin-table th {
+      text-align: left; padding: 14px 16px; font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted);
+      border-bottom: 2px solid var(--border); background: var(--bg-secondary);
+    }
+    .admin-table td {
+      padding: 16px; font-size: 13px; border-bottom: 1px solid var(--border); vertical-align: middle;
+    }
+    .admin-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .admin-table .prod-cell { display: flex; align-items: center; gap: 12px; }
+    .admin-table .prod-thumb {
+      width: 44px; height: 32px; background: linear-gradient(145deg, #0d0d14, #161620);
+      border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 8px; color: var(--text-muted);
+    }
+    .admin-table .prod-name { font-weight: 600; }
+    .status-badge {
+      display: inline-block; padding: 3px 10px; font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px; border-radius: 2px;
+    }
+    .status-active { background: rgba(46,168,111,0.15); color: var(--green); }
+    .status-draft { background: rgba(90,90,110,0.2); color: var(--text-muted); }
+    .admin-actions { display: flex; gap: 8px; }
+    .admin-actions button {
+      padding: 6px 12px; font-size: 10px; font-weight: 600; cursor: pointer;
+      text-transform: uppercase; letter-spacing: 1px; font-family: inherit;
+      border-radius: var(--card-radius); transition: all var(--transition);
+    }
+    .btn-edit { background: transparent; border: 1px solid var(--border); color: var(--text-secondary); }
+    .btn-edit:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-del { background: transparent; border: 1px solid var(--border); color: var(--text-muted); }
+    .btn-del:hover { border-color: var(--red); color: var(--red); }
+
+    /* Admin Tabs */
+    .admin-tabs { display: flex; gap: 0; margin-bottom: 32px; border-bottom: 1px solid var(--border); }
+    .admin-tab {
+      padding: 14px 24px; border: none; background: transparent;
+      font-size: 11px; font-weight: 600; cursor: pointer; color: var(--text-muted);
+      font-family: inherit; text-transform: uppercase; letter-spacing: 1.5px;
+      position: relative; transition: color var(--transition);
+    }
+    .admin-tab::after {
+      content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 0; height: 2px; background: var(--accent); transition: width var(--transition);
+    }
+    .admin-tab:hover { color: var(--text-secondary); }
+    .admin-tab.active { color: var(--text-primary); }
+    .admin-tab.active::after { width: 100%; }
+    .admin-tab-content { display: none; }
+    .admin-tab-content.active { display: block; }
+
+    /* Config Cards */
+    .config-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--card-radius);
+      padding: 28px; margin-bottom: 20px;
+    }
+    .config-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .config-card-title { display: flex; align-items: center; gap: 12px; }
+    .config-card-title h3 { font-size: 16px; font-weight: 600; }
+    .config-card-title .config-icon { font-size: 24px; }
+    .config-status {
+      padding: 4px 12px; font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; border-radius: 2px;
+    }
+    .config-status.active { background: rgba(46,168,111,0.15); color: var(--green); }
+    .config-status.inactive { background: rgba(90,90,110,0.2); color: var(--text-muted); }
+    .config-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+    .config-field { margin-bottom: 14px; }
+    .config-field label {
+      display: block; font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--text-muted); margin-bottom: 6px;
+    }
+    .config-field input {
+      width: 100%; padding: 12px 14px; background: var(--bg-secondary); border: 1px solid var(--border);
+      color: var(--text-primary); font-size: 13px; font-family: 'Inter', monospace; outline: none;
+      border-radius: var(--card-radius); transition: border-color var(--transition);
+    }
+    .config-field input:focus { border-color: var(--accent); }
+    .config-field input::placeholder { color: var(--text-muted); }
+    .config-field .hint { font-size: 10px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
+    .config-actions { display: flex; gap: 10px; margin-top: 20px; }
+    .config-test-result {
+      margin-top: 12px; padding: 10px 14px; border-radius: var(--card-radius);
+      font-size: 12px; display: none;
+    }
+    .config-test-result.success { display: block; background: rgba(46,168,111,0.1); border: 1px solid rgba(46,168,111,0.2); color: var(--green); }
+    .config-test-result.error { display: block; background: rgba(229,77,77,0.1); border: 1px solid rgba(229,77,77,0.2); color: var(--red); }
+
+    /* Admin Edit Modal */
+    .admin-modal-overlay {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7); z-index: 1001; align-items: center; justify-content: center;
+      padding: 20px; backdrop-filter: blur(8px);
+    }
+    .admin-modal-overlay.active { display: flex; }
+    .admin-modal {
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--card-radius);
+      max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5); padding: 32px;
+    }
+    .admin-modal h2 { font-size: 18px; font-weight: 600; margin-bottom: 4px; letter-spacing: -0.3px; }
+    .admin-modal .modal-tag { margin-bottom: 24px; }
+
+    /* Stats cards */
+    .admin-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 32px; }
+    .stat-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 20px;
+    }
+    .stat-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 8px; }
+    .stat-value { font-size: 24px; font-weight: 600; }
+    .stat-value.accent { color: var(--accent); }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed; bottom: 24px; right: 24px; background: var(--bg-card); color: var(--text-primary);
+      padding: 16px 24px; border: 1px solid var(--accent); border-left: 3px solid var(--accent);
+      font-size: 13px; font-weight: 500; box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      transform: translateY(100px); opacity: 0; transition: all 0.35s cubic-bezier(0.4,0,0.2,1); z-index: 2000;
+    }
+    .toast.visible { transform: translateY(0); opacity: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .checkout-layout { grid-template-columns: 1fr; }
+      .admin-stats { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 768px) {
+      .header { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 60px 20px 50px; }
+      .hero h1 { font-size: 32px; }
+      .categories { overflow-x: auto; justify-content: flex-start; padding: 0 20px; }
+      .cat-btn { white-space: nowrap; padding: 14px 20px; }
+      .products-section { padding: 32px 20px; }
+      .products-grid { grid-template-columns: 1fr; }
+      .features-bar { grid-template-columns: repeat(2, 1fr); }
+      .feature-item:nth-child(2) { border-right: none; }
+      .newsletter { padding: 50px 20px; }
+      .footer-inner { flex-direction: column; gap: 24px; align-items: center; text-align: center; }
+      .footer-brand { align-items: center; }
+      .checkout-page, .admin-page { padding: 32px 20px; }
+      .admin-table { font-size: 12px; }
+      .admin-stats { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: #2a2a38; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3a3a4a; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a class="logo" onclick="showView('store')">
+      <div class="logo-mark">AS</div>
+      <div class="logo-text">Andres Suarez <span>| Profesional</span></div>
+    </a>
+    <nav class="nav-links">
+      <a onclick="showView('store')">Productos</a>
+      <a href="#">Sobre Mí</a>
+      <a href="#">Tutoriales</a>
+      <a onclick="showView('admin')">Admin</a>
+    </nav>
+    <div class="header-actions">
+      <button onclick="showView('admin')" title="Panel Admin" style="font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase;">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12.22 2h-.44a2 2 0 00-2 2v.18a2 2 0 01-1 1.73l-.43.25a2 2 0 01-2 0l-.15-.08a2 2 0 00-2.73.73l-.22.38a2 2 0 00.73 2.73l.15.1a2 2 0 011 1.72v.51a2 2 0 01-1 1.74l-.15.09a2 2 0 00-.73 2.73l.22.38a2 2 0 002.73.73l.15-.08a2 2 0 012 0l.43.25a2 2 0 011 1.73V20a2 2 0 002 2h.44a2 2 0 002-2v-.18a2 2 0 011-1.73l.43-.25a2 2 0 012 0l.15.08a2 2 0 002.73-.73l.22-.39a2 2 0 00-.73-2.73l-.15-.08a2 2 0 01-1-1.74v-.5a2 2 0 011-1.74l.15-.09a2 2 0 00.73-2.73l-.22-.38a2 2 0 00-2.73-.73l-.15.08a2 2 0 01-2 0l-.43-.25a2 2 0 01-1-1.73V4a2 2 0 00-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+      <button onclick="showView('checkout')" title="Carrito" style="position:relative;">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══ STORE VIEW ═══ -->
+  <div id="storeView" class="view active">
+    <section class="hero">
+      <div class="hero-label">Herramientas Profesionales de Edición</div>
+      <h1>Eleva tu <strong>fotografía</strong><br>al siguiente nivel</h1>
+      <p>Plugins y presets diseñados por profesionales para fotógrafos que exigen la máxima calidad en cada disparo.</p>
+      <div class="hero-divider"></div>
+    </section>
+    <nav class="categories" id="categories">
+      <button class="cat-btn active" data-cat="all">Todos</button>
+      <button class="cat-btn" data-cat="presets">Presets</button>
+      <button class="cat-btn" data-cat="actions">Actions</button>
+      <button class="cat-btn" data-cat="overlays">Overlays</button>
+      <button class="cat-btn" data-cat="brushes">Brushes</button>
+    </nav>
+    <section class="products-section">
+      <div class="section-header">
+        <div class="section-title">Catálogo</div>
+        <div class="product-count" id="productCount"></div>
+      </div>
+      <div class="products-grid" id="productsGrid"></div>
+    </section>
+    <section class="features-bar">
+      <div class="feature-item"><div class="feature-icon">⬇</div><div class="feature-title">Descarga Inmediata</div><div class="feature-desc">Acceso instantáneo tras la compra</div></div>
+      <div class="feature-item"><div class="feature-icon">🛡</div><div class="feature-title">Pago Seguro</div><div class="feature-desc">Transacciones encriptadas SSL</div></div>
+      <div class="feature-item"><div class="feature-icon">♻</div><div class="feature-title">Actualizaciones</div><div class="feature-desc">Updates gratuitos de por vida</div></div>
+      <div class="feature-item"><div class="feature-icon">✉</div><div class="feature-title">Soporte Premium</div><div class="feature-desc">Asistencia técnica personalizada</div></div>
+    </section>
+    <section class="newsletter">
+      <span class="newsletter-label">Mantente Informado</span>
+      <h2>Novedades y <strong>ofertas exclusivas</strong></h2>
+      <p>Recibe en tu correo los nuevos lanzamientos y descuentos especiales antes que nadie.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Tu correo electrónico" />
+        <button type="button" onclick="showSubscribeToast()">Suscribir</button>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-name">Andres Suarez Profesional</div>
+          <div class="footer-brand-desc">Herramientas de edición fotográfica diseñadas para profesionales que buscan resultados excepcionales.</div>
+        </div>
+        <div class="footer-links">
+          <a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Soporte</a><a href="#">Términos</a><a href="#">Privacidad</a>
+        </div>
+      </div>
+      <div class="footer-copy"><span>© 2026 ANDRES SUAREZ PROFESIONAL — TODOS LOS DERECHOS RESERVADOS</span></div>
+    </footer>
+  </div>
+
+  <!-- ═══ CHECKOUT VIEW ═══ -->
+  <div id="checkoutView" class="view">
+    <div class="checkout-page">
+      <button class="checkout-back" onclick="showView('store')">← Continuar comprando</button>
+      <h1>Carrito de <strong>compras</strong></h1>
+      <div id="checkoutContent"></div>
+    </div>
+  </div>
+
+  <!-- ═══ ADMIN VIEW ═══ -->
+  <div id="adminView" class="view">
+    <div class="admin-page">
+      <button class="checkout-back" onclick="showView('store')">← Volver a la tienda</button>
+      <h1>Panel de <strong>Administración</strong></h1>
+      <p class="admin-subtitle">Gestiona tus productos digitales y configura pasarelas de pago.</p>
+
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchAdminTab('products')">📦 Productos</button>
+        <button class="admin-tab" onclick="switchAdminTab('payments')">💳 Pasarelas de Pago</button>
+      </div>
+
+      <!-- Products Tab -->
+      <div id="tab-products" class="admin-tab-content active">
+        <div class="admin-stats" id="adminStats"></div>
+        <div class="admin-toolbar">
+          <input class="admin-search" placeholder="Buscar producto..." oninput="renderAdminTable(this.value)" />
+          <div style="display:flex;gap:8px;">
+            <button class="btn-admin" onclick="openAdminModal()">+ Nuevo Producto</button>
+          </div>
+        </div>
+        <table class="admin-table" id="adminTable"></table>
+      </div>
+
+      <!-- Payments Config Tab -->
+      <div id="tab-payments" class="admin-tab-content">
+        <div style="margin-bottom:24px;">
+          <p style="font-size:13px;color:var(--text-secondary);line-height:1.7;">
+            Configura tus pasarelas de pago pegando las credenciales de cada servicio.
+            Las claves se guardan en tu navegador (localStorage) y se enviarán al backend cuando proceses pagos reales.
+          </p>
+        </div>
+
+        <!-- STRIPE CONFIG -->
+        <div class="config-card" id="stripeConfig">
+          <div class="config-card-header">
+            <div class="config-card-title">
+              <span class="config-icon">💳</span>
+              <div>
+                <h3>Stripe</h3>
+                <div style="font-size:11px;color:var(--text-muted);">Tarjetas de crédito/débito internacionales</div>
+              </div>
+            </div>
+            <span class="config-status inactive" id="stripeStatus">No configurado</span>
+          </div>
+          <div class="config-desc">
+            Acepta Visa, Mastercard, Amex, Apple Pay y Google Pay. Comisión: ~2.9% + $0.30/tx.<br>
+            Obtén tus claves en <a href="https://dashboard.stripe.com/apikeys" target="_blank" style="color:var(--accent);">dashboard.stripe.com/apikeys</a>
+          </div>
+          <div class="config-field">
+            <label>Publishable Key (pk_live_... o pk_test_...)</label>
+            <input id="stripe_pk" type="text" placeholder="pk_live_51Hx..." value="" />
+            <div class="hint">Esta clave se usa en el frontend para inicializar Stripe.js. Es segura para el cliente.</div>
+          </div>
+          <div class="config-field">
+            <label>Secret Key (sk_live_... o sk_test_...)</label>
+            <input id="stripe_sk" type="password" placeholder="sk_live_51Hx..." value="" />
+            <div class="hint">⚠️ Esta clave es privada. En producción NUNCA se expone en el frontend. Se usa solo en tu backend (Node.js/PHP).</div>
+          </div>
+          <div class="config-field">
+            <label>Webhook Secret (whsec_...)</label>
+            <input id="stripe_whsec" type="password" placeholder="whsec_..." value="" />
+            <div class="hint">Opcional. Se usa para verificar webhooks de Stripe en tu backend.</div>
+          </div>
+          <div class="config-actions">
+            <button class="btn-admin" onclick="savePaymentConfig('stripe')">Guardar Configuración</button>
+            <button class="btn-admin-outline" onclick="testPaymentConfig('stripe')">Probar Conexión</button>
+          </div>
+          <div class="config-test-result" id="stripeTestResult"></div>
+        </div>
+
+        <!-- PAYPAL CONFIG -->
+        <div class="config-card" id="paypalConfig">
+          <div class="config-card-header">
+            <div class="config-card-title">
+              <span class="config-icon">🅿️</span>
+              <div>
+                <h3>PayPal</h3>
+                <div style="font-size:11px;color:var(--text-muted);">Pagos internacionales con saldo PayPal y tarjetas</div>
+              </div>
+            </div>
+            <span class="config-status inactive" id="paypalStatus">No configurado</span>
+          </div>
+          <div class="config-desc">
+            Acepta saldo PayPal, Visa, Mastercard, débito directo. Comisión: ~3.49% + $0.49/tx.<br>
+            Obtén tus credenciales en <a href="https://developer.paypal.com/dashboard/applications/live" target="_blank" style="color:var(--accent);">developer.paypal.com</a>
+          </div>
+          <div class="config-field">
+            <label>Client ID</label>
+            <input id="paypal_client_id" type="text" placeholder="AYSq3Rk..." value="" />
+            <div class="hint">Se obtiene creando una app REST en PayPal Developer Dashboard. Usa el Client ID de "Live" para producción o "Sandbox" para pruebas.</div>
+          </div>
+          <div class="config-field">
+            <label>Client Secret</label>
+            <input id="paypal_secret" type="password" placeholder="EGnH..." value="" />
+            <div class="hint">⚠️ Privado. Se usa en el backend para capturar pagos y verificar webhooks.</div>
+          </div>
+          <div class="config-field">
+            <label>Modo</label>
+            <select id="paypal_mode" style="width:100%;padding:12px 14px;background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-primary);font-size:13px;font-family:inherit;outline:none;border-radius:var(--card-radius);">
+              <option value="sandbox">Sandbox (Pruebas)</option>
+              <option value="live">Live (Producción)</option>
+            </select>
+          </div>
+          <div class="config-actions">
+            <button class="btn-admin" onclick="savePaymentConfig('paypal')">Guardar Configuración</button>
+            <button class="btn-admin-outline" onclick="testPaymentConfig('paypal')">Probar Conexión</button>
+          </div>
+          <div class="config-test-result" id="paypalTestResult"></div>
+        </div>
+
+        <!-- YAPPY CONFIG -->
+        <div class="config-card" id="yappyConfig">
+          <div class="config-card-header">
+            <div class="config-card-title">
+              <span class="config-icon">📱</span>
+              <div>
+                <h3>Yappy (Banco General)</h3>
+                <div style="font-size:11px;color:var(--text-muted);">Pagos locales Panamá — Banco General</div>
+              </div>
+            </div>
+            <span class="config-status inactive" id="yappyStatus">No configurado</span>
+          </div>
+          <div class="config-desc">
+            Pagos móviles para clientes en Panamá con cuenta Banco General. Comisión: ~1% + ITBMS.<br>
+            Activa Yappy Comercial desde tu Banca en Línea o contacta <a href="mailto:botondepagoyappy@bgeneral.com" style="color:var(--accent);">botondepagoyappy@bgeneral.com</a>
+          </div>
+          <div class="config-field">
+            <label>ID de Comercio (Merchant ID)</label>
+            <input id="yappy_merchant_id" type="text" placeholder="Tu ID de comercio Yappy" value="" />
+            <div class="hint">Se genera desde el panel de Yappy Comercial en Banca en Línea de Banco General.</div>
+          </div>
+          <div class="config-field">
+            <label>Clave Secreta (Secret Key)</label>
+            <input id="yappy_secret" type="password" placeholder="Tu clave secreta Yappy" value="" />
+            <div class="hint">⚠️ Privado. Se usa en tu backend para autenticar solicitudes de pago con la API de Yappy.</div>
+          </div>
+          <div class="config-field">
+            <label>URL de Confirmación (IPN/Callback)</label>
+            <input id="yappy_callback" type="text" placeholder="https://tudominio.com/api/yappy/confirm" value="" />
+            <div class="hint">Endpoint GET en tu backend donde Yappy enviará la confirmación de pago.</div>
+          </div>
+          <div class="config-actions">
+            <button class="btn-admin" onclick="savePaymentConfig('yappy')">Guardar Configuración</button>
+            <button class="btn-admin-outline" onclick="testPaymentConfig('yappy')">Probar Conexión</button>
+          </div>
+          <div class="config-test-result" id="yappyTestResult"></div>
+        </div>
+
+        <!-- BACKEND INFO -->
+        <div class="config-card" style="border-color: rgba(201,168,76,0.2);">
+          <div class="config-card-header">
+            <div class="config-card-title">
+              <span class="config-icon">🖥️</span>
+              <div>
+                <h3>Configuración del Backend</h3>
+                <div style="font-size:11px;color:var(--text-muted);">Endpoints necesarios para procesar pagos reales</div>
+              </div>
+            </div>
+          </div>
+          <div class="config-desc" style="margin-bottom:12px;">
+            Para procesar pagos reales, necesitas un servidor backend (Node.js, PHP, Python, etc.) con los siguientes endpoints:
+          </div>
+          <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--card-radius);padding:20px;font-family:monospace;font-size:12px;line-height:2;color:var(--text-secondary);overflow-x:auto;">
+            <div style="color:var(--accent);margin-bottom:8px;">// ═══ STRIPE ═══</div>
+            <div><span style="color:#635bff;">POST</span> /api/stripe/create-checkout-session</div>
+            <div><span style="color:#635bff;">POST</span> /api/stripe/webhook</div>
+            <div style="color:var(--accent);margin-top:16px;margin-bottom:8px;">// ═══ PAYPAL ═══</div>
+            <div><span style="color:#0070ba;">POST</span> /api/paypal/create-order</div>
+            <div><span style="color:#0070ba;">POST</span> /api/paypal/capture-order</div>
+            <div style="color:var(--accent);margin-top:16px;margin-bottom:8px;">// ═══ YAPPY ═══</div>
+            <div><span style="color:#00d26a;">POST</span> /api/yappy/create-payment</div>
+            <div><span style="color:#00d26a;">GET</span>&nbsp; /api/yappy/confirm (IPN callback)</div>
+          </div>
+          <div class="config-field" style="margin-top:16px;">
+            <label>URL Base del Backend</label>
+            <input id="backend_url" type="text" placeholder="https://api.tudominio.com" value="" />
+            <div class="hint">La URL base de tu servidor backend. Los endpoints de pago se construirán sobre esta URL.</div>
+          </div>
+          <div class="config-actions">
+            <button class="btn-admin" onclick="saveBackendUrl()">Guardar URL Backend</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Detail Modal -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal" id="modal"></div>
+  </div>
+
+  <!-- Admin Edit Modal -->
+  <div class="admin-modal-overlay" id="adminModalOverlay" onclick="closeAdminModal(event)">
+    <div class="admin-modal" id="adminModal"></div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ═══════════════════════════════════════════════════════
+    // PAYMENT CONFIGURATION (stored in localStorage)
+    // ═══════════════════════════════════════════════════════
+    const STORAGE_KEY = 'as_payment_config';
+
+    function loadPaymentConfig() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { return {}; }
+    }
+
+    function getPaymentConfig() {
+      const cfg = loadPaymentConfig();
+      return {
+        stripe: cfg.stripe || {},
+        paypal: cfg.paypal || {},
+        yappy: cfg.yappy || {},
+        backendUrl: cfg.backendUrl || ''
+      };
+    }
+
+    function savePaymentConfig(provider) {
+      const cfg = loadPaymentConfig();
+      if (provider === 'stripe') {
+        cfg.stripe = {
+          pk: document.getElementById('stripe_pk').value.trim(),
+          sk: document.getElementById('stripe_sk').value.trim(),
+          whsec: document.getElementById('stripe_whsec').value.trim(),
+          configured: !!(document.getElementById('stripe_pk').value.trim() && document.getElementById('stripe_sk').value.trim())
+        };
+      } else if (provider === 'paypal') {
+        cfg.paypal = {
+          clientId: document.getElementById('paypal_client_id').value.trim(),
+          secret: document.getElementById('paypal_secret').value.trim(),
+          mode: document.getElementById('paypal_mode').value,
+          configured: !!(document.getElementById('paypal_client_id').value.trim())
+        };
+      } else if (provider === 'yappy') {
+        cfg.yappy = {
+          merchantId: document.getElementById('yappy_merchant_id').value.trim(),
+          secret: document.getElementById('yappy_secret').value.trim(),
+          callback: document.getElementById('yappy_callback').value.trim(),
+          configured: !!(document.getElementById('yappy_merchant_id').value.trim() && document.getElementById('yappy_secret').value.trim())
+        };
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cfg));
+      updatePaymentStatuses();
+      showToast(`✅ Configuración de ${provider.charAt(0).toUpperCase() + provider.slice(1)} guardada`);
+    }
+
+    function saveBackendUrl() {
+      const cfg = loadPaymentConfig();
+      cfg.backendUrl = document.getElementById('backend_url').value.trim();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cfg));
+      showToast('✅ URL del backend guardada');
+    }
+
+    function loadConfigFields() {
+      const cfg = getPaymentConfig();
+      document.getElementById('stripe_pk').value = cfg.stripe.pk || '';
+      document.getElementById('stripe_sk').value = cfg.stripe.sk || '';
+      document.getElementById('stripe_whsec').value = cfg.stripe.whsec || '';
+      document.getElementById('paypal_client_id').value = cfg.paypal.clientId || '';
+      document.getElementById('paypal_secret').value = cfg.paypal.secret || '';
+      if (cfg.paypal.mode) document.getElementById('paypal_mode').value = cfg.paypal.mode;
+      document.getElementById('yappy_merchant_id').value = cfg.yappy.merchantId || '';
+      document.getElementById('yappy_secret').value = cfg.yappy.secret || '';
+      document.getElementById('yappy_callback').value = cfg.yappy.callback || '';
+      document.getElementById('backend_url').value = cfg.backendUrl || '';
+      updatePaymentStatuses();
+    }
+
+    function updatePaymentStatuses() {
+      const cfg = getPaymentConfig();
+      const setStatus = (id, configured) => {
+        const el = document.getElementById(id);
+        el.textContent = configured ? 'Configurado ✓' : 'No configurado';
+        el.className = 'config-status ' + (configured ? 'active' : 'inactive');
+      };
+      setStatus('stripeStatus', cfg.stripe.configured);
+      setStatus('paypalStatus', cfg.paypal.configured);
+      setStatus('yappyStatus', cfg.yappy.configured);
+    }
+
+    function testPaymentConfig(provider) {
+      const cfg = getPaymentConfig();
+      const resultEl = document.getElementById(provider + 'TestResult');
+
+      if (provider === 'stripe') {
+        const pk = cfg.stripe.pk || '';
+        if (!pk) { showTestResult(resultEl, false, 'Falta la Publishable Key'); return; }
+        if (!pk.startsWith('pk_')) { showTestResult(resultEl, false, 'La Publishable Key debe comenzar con pk_test_ o pk_live_'); return; }
+        // Try loading Stripe.js with the key
+        if (typeof Stripe !== 'undefined') {
+          try {
+            const stripe = Stripe(pk);
+            showTestResult(resultEl, true, '✅ Stripe.js inicializado correctamente con tu Publishable Key. Modo: ' + (pk.includes('test') ? 'TEST' : 'LIVE'));
+          } catch(e) {
+            showTestResult(resultEl, false, 'Error al inicializar Stripe: ' + e.message);
+          }
+        } else {
+          // Load Stripe.js dynamically
+          const script = document.createElement('script');
+          script.src = 'https://js.stripe.com/v3/';
+          script.onload = () => {
+            try {
+              const stripe = Stripe(pk);
+              showTestResult(resultEl, true, '✅ Stripe.js cargado e inicializado correctamente. Modo: ' + (pk.includes('test') ? 'TEST' : 'LIVE'));
+            } catch(e) {
+              showTestResult(resultEl, false, 'Error: ' + e.message);
+            }
+          };
+          script.onerror = () => showTestResult(resultEl, false, 'No se pudo cargar Stripe.js');
+          document.head.appendChild(script);
+        }
+      } else if (provider === 'paypal') {
+        const clientId = cfg.paypal.clientId || '';
+        if (!clientId) { showTestResult(resultEl, false, 'Falta el Client ID'); return; }
+        if (clientId.length < 10) { showTestResult(resultEl, false, 'El Client ID parece inválido (muy corto)'); return; }
+        showTestResult(resultEl, true, '✅ Client ID validado (formato correcto). Modo: ' + (cfg.paypal.mode === 'live' ? 'PRODUCCIÓN' : 'SANDBOX') + '. Los botones PayPal se cargarán en el checkout.');
+      } else if (provider === 'yappy') {
+        const merchantId = cfg.yappy.merchantId || '';
+        const secret = cfg.yappy.secret || '';
+        if (!merchantId || !secret) { showTestResult(resultEl, false, 'Faltan el Merchant ID y/o la Clave Secreta'); return; }
+        showTestResult(resultEl, true, '✅ Credenciales de Yappy guardadas. La conexión real se verificará al procesar el primer pago desde tu backend.');
+      }
+    }
+
+    function showTestResult(el, success, msg) {
+      el.className = 'config-test-result ' + (success ? 'success' : 'error');
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // DATA
+    // ═══════════════════════════════════════════════════════
+    let products = [
+      { id:1, name:"Cinematic LUTs Free", subtitle:"Pack de LUTs Gratuitos", desc:"5 LUTs cinematográficos para darle un look profesional a tus fotos.", longDesc:"Pack de iniciación con 5 LUTs inspirados en el cine. Compatibles con Lightroom, Photoshop y Capture One.", features:["5 LUTs cinematográficos","Compatible con Lightroom & Photoshop","Guía de instalación incluida","Uso comercial permitido"], price:0, oldPrice:null, badge:"free", cat:"presets", glow:"rgba(46,168,111,0.2)", accent:"#2ea86f", status:"active" },
+      { id:2, name:"ChromaPreset Pro", subtitle:"Pack de Presets Premium", desc:"+30 presets profesionales para retrato y moda con acabado editorial.", longDesc:"Colección premium de 30+ presets diseñados para fotografía de retrato y moda.", features:["30+ presets premium","Ajustes de piel avanzados","Perfiles de cámara incluidos","Soporte prioritario","Actualizaciones gratuitas"], price:24.00, oldPrice:39.00, badge:"sale", cat:"presets", glow:"rgba(201,168,76,0.2)", accent:"#c9a84c", status:"active" },
+      { id:3, name:"RetouchKit", subtitle:"Actions de Retoque", desc:"Pack de 20 actions para retoque profesional de piel y ojos en Photoshop.", longDesc:"Kit completo de retoque con 20 acciones automatizadas.", features:["20 actions de retoque","Frequency Separation incluido","Dodge & Burn automático","Tutorial paso a paso","Compatible con PS 2022+"], price:19.00, oldPrice:29.00, badge:"sale", cat:"actions", glow:"rgba(201,168,76,0.2)", accent:"#dbb85c", status:"active" },
+      { id:4, name:"LightLeaks Vol.1", subtitle:"Overlays de Luz", desc:"50 overlays de fugas de luz orgánicas en alta resolución.", longDesc:"Colección artesanal de 50 fugas de luz capturadas con lentes vintage.", features:["50 overlays en alta resolución","Formato PNG transparente","6000x4000px","Lentes vintage reales","Uso comercial incluido"], price:14.00, oldPrice:null, badge:"new", cat:"overlays", glow:"rgba(74,107,181,0.2)", accent:"#4a6bb5", status:"active" },
+      { id:5, name:"FilmGrain Pack", subtitle:"Texturas Analógicas", desc:"Texturas de grano de película escaneadas de film 35mm y medio formato.", longDesc:"Grano auténtico escaneado de película Kodak Portra, Fuji Pro y Ilford HP5.", features:["40 texturas de grano","Escaneado de film real","Kodak, Fuji & Ilford","Texturas de polvo extra","Resolución 8K"], price:12.00, oldPrice:19.00, badge:"sale", cat:"overlays", glow:"rgba(201,168,76,0.15)", accent:"#c9a84c", status:"active" },
+      { id:6, name:"SkinBrush Pro", subtitle:"Brushes para Piel", desc:"Set de 15 brushes especializados para retoque de piel natural.", longDesc:"Pinceles personalizados para Photoshop diseñados para retoque de piel realista.", features:["15 brushes personalizados","Textura de piel realista","Sensibilidad a presión","Presets de opacidad","Tutorial de uso incluido"], price:9.00, oldPrice:null, badge:null, cat:"brushes", glow:"rgba(61,90,153,0.2)", accent:"#3d5a99", status:"active" }
+    ];
+
+    let cart = [];
+    let activeCategory = 'all';
+    let selectedPayment = 'stripe';
+
+    // ═══ VIEW MANAGEMENT ═══
+    function showView(view) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.getElementById(view + 'View').classList.add('active');
+      window.scrollTo(0, 0);
+      if (view === 'checkout') renderCheckout();
+      if (view === 'admin') { renderAdminStats(); renderAdminTable(); loadConfigFields(); }
+    }
+
+    // ═══ ADMIN TAB SWITCHING ═══
+    function switchAdminTab(tab) {
+      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('tab-' + tab).classList.add('active');
+      if (tab === 'payments') loadConfigFields();
+    }
+
+    // ═══ STORE ═══
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      const active = products.filter(p => p.status === 'active');
+      const filtered = activeCategory === 'all' ? active : active.filter(p => p.cat === activeCategory);
+      document.getElementById('productCount').textContent = filtered.length + ' producto' + (filtered.length !== 1 ? 's' : '');
+      grid.innerHTML = filtered.map(p => `
+        <div class="product-card" onclick="openModal(${p.id})">
+          ${p.badge ? `<span class="badge badge-${p.badge}">${p.badge==='sale'?'Oferta':p.badge==='free'?'Gratis':'Nuevo'}</span>` : ''}
+          <div class="product-image">
+            <div class="box-art" style="background:linear-gradient(145deg,#0d0d14,#161620);">
+              <div class="box-inner" style="--glow-color:${p.glow}">
+                <div class="box-subtitle">${p.subtitle}</div>
+                <div class="box-title" style="background:linear-gradient(135deg,#fff,${p.accent});-webkit-background-clip:text;-webkit-text-fill-color:transparent;">${p.name}</div>
+                <div class="box-badge-corner">${p.cat.toUpperCase()}</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-name">${p.name}</div>
+            <div class="product-desc">${p.desc}</div>
+            <div class="product-price">
+              <span class="price-current">${fmt(p.price)}</span>
+              ${p.oldPrice ? `<span class="price-old">${fmt(p.oldPrice)}</span>` : ''}
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function fmt(n) { return n === 0 ? '$0.00' : '$' + n.toFixed(2); }
+
+    document.getElementById('categories').addEventListener('click', (e) => {
+      if (e.target.classList.contains('cat-btn')) {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        activeCategory = e.target.dataset.cat;
+        renderProducts();
+      }
+    });
+
+    // ═══ PRODUCT MODAL ═══
+    function openModal(id) {
+      const p = products.find(pr => pr.id === id);
+      if (!p) return;
+      document.getElementById('modal').innerHTML = `
+        <div class="modal-image" style="background:linear-gradient(145deg,#0d0d14,#161620);">
+          <button class="modal-close" onclick="closeModal(event,true)">✕</button>
+          <div class="box-inner" style="--glow-color:${p.glow};width:200px;height:120px;border:1px solid rgba(255,255,255,0.06);">
+            <div class="box-subtitle">${p.subtitle}</div>
+            <div class="box-title" style="font-size:18px;background:linear-gradient(135deg,#fff,${p.accent});-webkit-background-clip:text;-webkit-text-fill-color:transparent;">${p.name}</div>
+          </div>
+        </div>
+        <div class="modal-body">
+          <h2>${p.name}</h2>
+          <span class="modal-tag">${p.subtitle}</span>
+          <p class="modal-desc">${p.longDesc}</p>
+          <ul class="modal-features">${p.features.map(f => `<li>${f}</li>`).join('')}</ul>
+          <div class="modal-price-row">
+            <div class="product-price">
+              <span class="price-current" style="font-size:26px">${fmt(p.price)}</span>
+              ${p.oldPrice ? `<span class="price-old" style="font-size:16px">${fmt(p.oldPrice)}</span>` : ''}
+            </div>
+          </div>
+          <button class="btn-primary ${p.price===0?'free':''}" onclick="addToCart(${p.id})">${p.price===0?'Descargar Gratis':'Añadir al Carrito'}</button>
+        </div>`;
+      document.getElementById('modalOverlay').classList.add('active');
+    }
+
+    function closeModal(e, force) {
+      if (force || e.target === document.getElementById('modalOverlay'))
+        document.getElementById('modalOverlay').classList.remove('active');
+    }
+
+    // ═══ CART ═══
+    function addToCart(id) {
+      const p = products.find(pr => pr.id === id);
+      if (!p) return;
+      const existing = cart.find(c => c.id === id);
+      if (existing) { existing.qty++; }
+      else { cart.push({ ...p, qty: 1 }); }
+      updateCartCount();
+      document.getElementById('modalOverlay').classList.remove('active');
+      showToast(p.price === 0 ? `"${p.name}" — Descarga lista` : `"${p.name}" añadido al carrito`);
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(c => c.id !== id);
+      updateCartCount();
+      renderCheckout();
+    }
+
+    function updateQty(id, delta) {
+      const item = cart.find(c => c.id === id);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) { cart = cart.filter(c => c.id !== id); }
+      updateCartCount();
+      renderCheckout();
+    }
+
+    function updateCartCount() {
+      document.getElementById('cartCount').textContent = cart.reduce((s, c) => s + c.qty, 0);
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // CHECKOUT WITH REAL PAYMENT INTEGRATION
+    // ═══════════════════════════════════════════════════════
+    function renderCheckout() {
+      const el = document.getElementById('checkoutContent');
+      if (cart.length === 0) {
+        el.innerHTML = `
+          <div class="cart-empty">
+            <div class="cart-empty-icon">🛒</div>
+            <h3>Tu carrito está vacío</h3>
+            <p>Explora nuestro catálogo y añade plugins profesionales a tu colección.</p>
+            <br><button class="btn-primary" style="width:auto;padding:14px 32px;" onclick="showView('store')">Ver Productos</button>
+          </div>`;
+        return;
+      }
+
+      const cfg = getPaymentConfig();
+      const subtotal = cart.reduce((s, c) => s + (c.price * c.qty), 0);
+      const tax = subtotal * 0.07;
+      const total = subtotal + tax;
+
+      const stripeOk = cfg.stripe.configured;
+      const paypalOk = cfg.paypal.configured;
+      const yappyOk = cfg.yappy.configured;
+
+      el.innerHTML = `
+        <div class="checkout-layout">
+          <div>
+            <!-- Cart Items -->
+            <div style="margin-bottom:32px;">
+              <h3 style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--text-secondary);margin-bottom:16px;">
+                Productos (${cart.reduce((s,c)=>s+c.qty,0)})
+              </h3>
+              ${cart.map(c => `
+                <div class="cart-item">
+                  <div class="cart-item-img"><span>${c.cat}</span></div>
+                  <div class="cart-item-info">
+                    <div class="cart-item-name">${c.name}</div>
+                    <div class="cart-item-cat">${c.subtitle}</div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <button onclick="updateQty(${c.id},-1)" style="background:none;border:1px solid var(--border);color:var(--text-secondary);width:28px;height:28px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;">−</button>
+                    <span style="font-size:13px;width:24px;text-align:center;">${c.qty}</span>
+                    <button onclick="updateQty(${c.id},1)" style="background:none;border:1px solid var(--border);color:var(--text-secondary);width:28px;height:28px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;">+</button>
+                  </div>
+                  <div class="cart-item-price">${fmt(c.price * c.qty)}</div>
+                  <button class="cart-item-remove" onclick="removeFromCart(${c.id})">✕</button>
+                </div>
+              `).join('')}
+            </div>
+
+            <!-- Billing Info -->
+            <div class="billing-section">
+              <h3>Datos de Facturación</h3>
+              <div class="form-row">
+                <div class="form-group"><label>Nombre</label><input id="bill_name" placeholder="Nombre" /></div>
+                <div class="form-group"><label>Apellido</label><input id="bill_lastname" placeholder="Apellido" /></div>
+              </div>
+              <div class="form-row full">
+                <div class="form-group"><label>Correo Electrónico</label><input id="bill_email" type="email" placeholder="correo@ejemplo.com" /></div>
+              </div>
+              <div class="form-row full">
+                <div class="form-group"><label>Empresa (Opcional)</label><input id="bill_company" placeholder="Nombre de empresa" /></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>País</label>
+                  <select id="bill_country">
+                    <option value="PA">Panamá</option>
+                    <option value="US">Estados Unidos</option>
+                    <option value="CO">Colombia</option>
+                    <option value="MX">México</option>
+                    <option value="ES">España</option>
+                    <option value="CR">Costa Rica</option>
+                    <option value="OTHER">Otro</option>
+                  </select>
+                </div>
+                <div class="form-group"><label>Ciudad</label><input id="bill_city" placeholder="Ciudad" /></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label>Dirección</label><input id="bill_address" placeholder="Dirección" /></div>
+                <div class="form-group"><label>Código Postal</label><input id="bill_zip" placeholder="0000" /></div>
+              </div>
+              <div class="form-row full">
+                <div class="form-group"><label>Teléfono</label><input id="bill_phone" placeholder="+507 6000-0000" /></div>
+              </div>
+              <div class="form-row full">
+                <div class="form-group"><label>NIT / RUC (Opcional)</label><input id="bill_ruc" placeholder="Número fiscal" /></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Summary -->
+          <div>
+            <div class="order-summary">
+              <h3>Resumen del Pedido</h3>
+              ${cart.map(c => `
+                <div class="summary-item">
+                  <span class="name">${c.name} × ${c.qty}</span>
+                  <span class="val">${fmt(c.price * c.qty)}</span>
+                </div>
+              `).join('')}
+              <div class="summary-divider"></div>
+              <div class="summary-item"><span class="name">Subtotal</span><span class="val">${fmt(subtotal)}</span></div>
+              <div class="summary-item"><span class="name">ITBMS (7%)</span><span class="val">${fmt(tax)}</span></div>
+              <div class="summary-divider"></div>
+              <div class="summary-total"><span>Total</span><span class="val">${fmt(total)}</span></div>
+
+              <div class="payment-methods">
+                <h4>Método de Pago</h4>
+                <div class="payment-option ${selectedPayment==='stripe'?'selected':''}" onclick="selectPayment('stripe')">
+                  <div class="payment-radio"></div>
+                  <div style="flex:1;">
+                    <div class="payment-label">💳 Tarjeta de Crédito / Débito</div>
+                    <div class="payment-desc">Visa, Mastercard, Amex — Stripe</div>
+                  </div>
+                  <span class="payment-status ${stripeOk?'configured':'pending'}">${stripeOk?'Activo':'Pendiente'}</span>
+                </div>
+                <div class="payment-option ${selectedPayment==='paypal'?'selected':''}" onclick="selectPayment('paypal')">
+                  <div class="payment-radio"></div>
+                  <div style="flex:1;">
+                    <div class="payment-label">🅿️ PayPal</div>
+                    <div class="payment-desc">Pago internacional seguro</div>
+                  </div>
+                  <span class="payment-status ${paypalOk?'configured':'pending'}">${paypalOk?'Activo':'Pendiente'}</span>
+                </div>
+                <div class="payment-option ${selectedPayment==='yappy'?'selected':''}" onclick="selectPayment('yappy')">
+                  <div class="payment-radio"></div>
+                  <div style="flex:1;">
+                    <div class="payment-label">📱 Yappy</div>
+                    <div class="payment-desc">Banco General — Pago local Panamá</div>
+                  </div>
+                  <span class="payment-status ${yappyOk?'configured':'pending'}">${yappyOk?'Activo':'Pendiente'}</span>
+                </div>
+              </div>
+
+              <!-- Dynamic Payment Area -->
+              <div id="paymentProcessingArea"></div>
+
+              <div class="secure-badge">🔒 Pago 100% seguro — SSL Encriptado</div>
+            </div>
+          </div>
+        </div>`;
+
+      // Render the payment button/widget for selected method
+      renderPaymentArea(total);
+    }
+
+    function selectPayment(method) {
+      selectedPayment = method;
+      renderCheckout();
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // PAYMENT PROCESSING — STRIPE
+    // ═══════════════════════════════════════════════════════
+    function renderPaymentArea(total) {
+      const area = document.getElementById('paymentProcessingArea');
+      if (!area) return;
+      const cfg = getPaymentConfig();
+
+      if (selectedPayment === 'stripe') {
+        if (!cfg.stripe.configured) {
+          area.innerHTML = `<div class="payment-info-box">
+            <strong>Stripe no configurado.</strong> Ve a Admin → Pasarelas de Pago para pegar tu Publishable Key y Secret Key.
+          </div>`;
+          return;
+        }
+        area.innerHTML = `
+          <button class="stripe-btn" onclick="processStripe(${total})" id="stripePayBtn">
+            💳 Pagar ${fmt(total)} con Stripe
+          </button>
+          <div style="text-align:center;margin-top:8px;font-size:10px;color:var(--text-muted);">
+            Serás redirigido al checkout seguro de Stripe
+          </div>`;
+        // Load Stripe.js if not loaded
+        if (typeof Stripe === 'undefined') {
+          const s = document.createElement('script');
+          s.src = 'https://js.stripe.com/v3/';
+          document.head.appendChild(s);
+        }
+      } else if (selectedPayment === 'paypal') {
+        if (!cfg.paypal.configured) {
+          area.innerHTML = `<div class="payment-info-box">
+            <strong>PayPal no configurado.</strong> Ve a Admin → Pasarelas de Pago para pegar tu Client ID.
+          </div>`;
+          return;
+        }
+        area.innerHTML = `<div id="paypal-button-container" class="paypal-container"></div>`;
+        loadPayPalButtons(total, cfg);
+      } else if (selectedPayment === 'yappy') {
+        if (!cfg.yappy.configured) {
+          area.innerHTML = `<div class="payment-info-box">
+            <strong>Yappy no configurado.</strong> Ve a Admin → Pasarelas de Pago para pegar tu Merchant ID y Secret Key.
+          </div>`;
+          return;
+        }
+        area.innerHTML = `
+          <button class="yappy-btn" onclick="processYappy(${total})" id="yappyPayBtn">
+            📱 Pagar ${fmt(total)} con Yappy
+          </button>
+          <div style="text-align:center;margin-top:8px;font-size:10px;color:var(--text-muted);">
+            Se generará una solicitud de pago en tu app Yappy
+          </div>`;
+      }
+    }
+
+    // ── STRIPE CHECKOUT ──
+    async function processStripe(total) {
+      const btn = document.getElementById('stripePayBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ Procesando...';
+
+      const cfg = getPaymentConfig();
+      const email = document.getElementById('bill_email')?.value || '';
+      const backendUrl = cfg.backendUrl;
+
+      if (!backendUrl) {
+        showToast('⚠️ Configura la URL del backend en Admin → Pasarelas de Pago');
+        btn.disabled = false;
+        btn.innerHTML = `💳 Pagar ${fmt(total)} con Stripe`;
+        return;
+      }
+
+      try {
+        // Call your backend to create a Stripe Checkout Session
+        const response = await fetch(backendUrl + '/api/stripe/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            items: cart.map(c => ({
+              name: c.name,
+              description: c.subtitle,
+              price: Math.round(c.price * 100), // Stripe uses cents
+              quantity: c.qty
+            })),
+            customer_email: email,
+            tax_rate: 7, // ITBMS
+            currency: 'usd',
+            success_url: window.location.origin + '?payment=success',
+            cancel_url: window.location.origin + '?payment=cancel'
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.sessionId || data.id) {
+          // Redirect to Stripe Checkout
+          const stripe = Stripe(cfg.stripe.pk);
+          await stripe.redirectToCheckout({ sessionId: data.sessionId || data.id });
+        } else {
+          throw new Error(data.error || 'Error al crear la sesión de pago');
+        }
+      } catch (err) {
+        showToast('❌ Error: ' + err.message);
+        btn.disabled = false;
+        btn.innerHTML = `💳 Pagar ${fmt(total)} con Stripe`;
+
+        // DEMO MODE: Simulate success
+        if (!cfg.backendUrl || err.message.includes('Failed to fetch')) {
+          setTimeout(() => {
+            if (confirm('DEMO: ¿Simular pago exitoso con Stripe?')) {
+              processOrderSuccess('Stripe');
+            }
+          }, 500);
+        }
+      }
+    }
+
+    // ── PAYPAL SMART BUTTONS ──
+    function loadPayPalButtons(total, cfg) {
+      const container = document.getElementById('paypal-button-container');
+      if (!container) return;
+
+      const mode = cfg.paypal.mode || 'sandbox';
+      const clientId = cfg.paypal.clientId;
+      const scriptId = 'paypal-sdk';
+      const backendUrl = cfg.backendUrl;
+
+      // Remove old PayPal SDK if loaded
+      const oldScript = document.getElementById(scriptId);
+      if (oldScript) oldScript.remove();
+
+      const script = document.createElement('script');
+      script.id = scriptId;
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD&intent=capture`;
+      script.onload = () => {
+        if (typeof paypal === 'undefined') return;
+        container.innerHTML = '';
+        paypal.Buttons({
+          style: {
+            layout: 'vertical',
+            color: 'gold',
+            shape: 'rect',
+            label: 'pay',
+            height: 48
+          },
+          createOrder: async (data, actions) => {
+            if (backendUrl) {
+              // Production: call your backend
+              try {
+                const res = await fetch(backendUrl + '/api/paypal/create-order', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    items: cart.map(c => ({
+                      name: c.name,
+                      unit_amount: c.price.toFixed(2),
+                      quantity: c.qty
+                    })),
+                    total: total.toFixed(2),
+                    currency: 'USD'
+                  })
+                });
+                const order = await res.json();
+                return order.id;
+              } catch(e) {
+                // Fallback to client-side
+                return actions.order.create({
+                  purchase_units: [{
+                    amount: { value: total.toFixed(2), currency_code: 'USD' },
+                    description: 'Andres Suarez Profesional - Plugins'
+                  }]
+                });
+              }
+            } else {
+              // Client-side order (sandbox/demo)
+              return actions.order.create({
+                purchase_units: [{
+                  amount: { value: total.toFixed(2), currency_code: 'USD' },
+                  description: 'Andres Suarez Profesional - Plugins'
+                }]
+              });
+            }
+          },
+          onApprove: async (data, actions) => {
+            if (backendUrl) {
+              try {
+                const res = await fetch(backendUrl + '/api/paypal/capture-order', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ orderId: data.orderID })
+                });
+                const result = await res.json();
+                if (result.status === 'COMPLETED') {
+                  processOrderSuccess('PayPal');
+                }
+              } catch(e) {
+                const capture = await actions.order.capture();
+                processOrderSuccess('PayPal');
+              }
+            } else {
+              const capture = await actions.order.capture();
+              processOrderSuccess('PayPal');
+            }
+          },
+          onError: (err) => {
+            showToast('❌ Error de PayPal: ' + err.message);
+          }
+        }).render('#paypal-button-container');
+      };
+      script.onerror = () => {
+        container.innerHTML = `<div class="payment-info-box">
+          <strong>Error al cargar PayPal SDK.</strong> Verifica que el Client ID sea correcto.
+        </div>`;
+      };
+      document.head.appendChild(script);
+    }
+
+    // ── YAPPY PAYMENT ──
+    async function processYappy(total) {
+      const btn = document.getElementById('yappyPayBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ Procesando...';
+
+      const cfg = getPaymentConfig();
+      const backendUrl = cfg.backendUrl;
+      const phone = document.getElementById('bill_phone')?.value || '';
+
+      if (!backendUrl) {
+        showToast('⚠️ Configura la URL del backend en Admin → Pasarelas de Pago');
+        btn.disabled = false;
+        btn.innerHTML = `📱 Pagar ${fmt(total)} con Yappy`;
+        return;
+      }
+
+      try {
+        // Call your backend which handles Yappy's 2-step API:
+        // 1. POST /payments/validate/merchant → get auth token
+        // 2. POST /payments/payment-wc → create payment request
+        const response = await fetch(backendUrl + '/api/yappy/create-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            total: total.toFixed(2),
+            subtotal: (total / 1.07).toFixed(2),
+            tax: (total - total / 1.07).toFixed(2),
+            phone: phone,
+            orderId: 'ORD-' + Date.now(),
+            items: cart.map(c => ({
+              name: c.name,
+              price: c.price,
+              quantity: c.qty
+            }))
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.success && data.redirectUrl) {
+          // Redirect to Yappy payment page
+          window.location.href = data.redirectUrl;
+        } else if (data.success) {
+          showToast('📱 Solicitud Yappy enviada. Confirma el pago en tu app Yappy.');
+          // Poll for confirmation or wait for IPN callback
+          pollYappyStatus(data.orderId || data.transactionId);
+        } else {
+          throw new Error(data.error || 'Error al crear pago Yappy');
+        }
+      } catch (err) {
+        showToast('❌ Error: ' + err.message);
+        btn.disabled = false;
+        btn.innerHTML = `📱 Pagar ${fmt(total)} con Yappy`;
+
+        if (!cfg.backendUrl || err.message.includes('Failed to fetch')) {
+          setTimeout(() => {
+            if (confirm('DEMO: ¿Simular pago exitoso con Yappy?')) {
+              processOrderSuccess('Yappy');
+            }
+          }, 500);
+        }
+      }
+    }
+
+    function pollYappyStatus(orderId) {
+      const cfg = getPaymentConfig();
+      if (!cfg.backendUrl) return;
+
+      let attempts = 0;
+      const interval = setInterval(async () => {
+        attempts++;
+        if (attempts > 30) { clearInterval(interval); return; } // 5 min timeout
+        try {
+          const res = await fetch(cfg.backendUrl + `/api/yappy/status/${orderId}`);
+          const data = await res.json();
+          if (data.status === 'completed') {
+            clearInterval(interval);
+            processOrderSuccess('Yappy');
+          }
+        } catch(e) { /* retry */ }
+      }, 10000); // Check every 10 seconds
+    }
+
+    // ═══ ORDER SUCCESS ═══
+    function processOrderSuccess(method) {
+      showToast(`✅ ¡Pago confirmado con ${method}! Recibirás los archivos en tu correo.`);
+      cart = [];
+      updateCartCount();
+      setTimeout(() => showView('store'), 2500);
+    }
+
+    // ═══ ADMIN ═══
+    function renderAdminStats() {
+      const active = products.filter(p => p.status === 'active');
+      const drafts = products.filter(p => p.status === 'draft');
+      const freeCount = active.filter(p => p.price === 0).length;
+      const cfg = getPaymentConfig();
+      const gateways = [cfg.stripe.configured, cfg.paypal.configured, cfg.yappy.configured].filter(Boolean).length;
+      document.getElementById('adminStats').innerHTML = `
+        <div class="stat-card"><div class="stat-label">Total Productos</div><div class="stat-value">${products.length}</div></div>
+        <div class="stat-card"><div class="stat-label">Publicados</div><div class="stat-value accent">${active.length}</div></div>
+        <div class="stat-card"><div class="stat-label">Borradores</div><div class="stat-value">${drafts.length}</div></div>
+        <div class="stat-card"><div class="stat-label">Pasarelas Activas</div><div class="stat-value" style="color:${gateways>0?'var(--green)':'var(--text-muted)'}">${gateways}/3</div></div>
+      `;
+    }
+
+    function renderAdminTable(search) {
+      const s = (search || '').toLowerCase();
+      const filtered = s ? products.filter(p => p.name.toLowerCase().includes(s) || p.cat.includes(s)) : products;
+      document.getElementById('adminTable').innerHTML = `
+        <thead><tr>
+          <th>Producto</th><th>Categoría</th><th>Precio</th><th>Estado</th><th>Acciones</th>
+        </tr></thead>
+        <tbody>
+          ${filtered.map(p => `
+            <tr>
+              <td><div class="prod-cell"><div class="prod-thumb">${p.cat.substring(0,3).toUpperCase()}</div><span class="prod-name">${p.name}</span></div></td>
+              <td style="text-transform:capitalize;">${p.cat}</td>
+              <td>${fmt(p.price)}${p.oldPrice ? ` <span style="color:var(--text-muted);text-decoration:line-through;font-size:11px;">${fmt(p.oldPrice)}</span>` : ''}</td>
+              <td><span class="status-badge ${p.status==='active'?'status-active':'status-draft'}">${p.status==='active'?'Publicado':'Borrador'}</span></td>
+              <td>
+                <div class="admin-actions">
+                  <button class="btn-edit" onclick="openAdminModal(${p.id})">Editar</button>
+                  <button class="btn-edit" onclick="toggleStatus(${p.id})">${p.status==='active'?'Ocultar':'Publicar'}</button>
+                  <button class="btn-del" onclick="deleteProduct(${p.id})">Eliminar</button>
+                </div>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>`;
+    }
+
+    function toggleStatus(id) {
+      const p = products.find(pr => pr.id === id);
+      if (p) { p.status = p.status === 'active' ? 'draft' : 'active'; }
+      renderAdminStats(); renderAdminTable(); renderProducts();
+      showToast(p.status === 'active' ? `"${p.name}" publicado` : `"${p.name}" ocultado`);
+    }
+
+    function deleteProduct(id) {
+      const p = products.find(pr => pr.id === id);
+      if (!p) return;
+      if (!confirm(`¿Eliminar "${p.name}"? Esta acción no se puede deshacer.`)) return;
+      products = products.filter(pr => pr.id !== id);
+      cart = cart.filter(c => c.id !== id);
+      updateCartCount();
+      renderAdminStats(); renderAdminTable(); renderProducts();
+      showToast(`"${p.name}" eliminado`);
+    }
+
+    function openAdminModal(id) {
+      const p = id ? products.find(pr => pr.id === id) : null;
+      const isNew = !p;
+      const cats = ['presets','actions','overlays','brushes'];
+      document.getElementById('adminModal').innerHTML = `
+        <h2>${isNew ? 'Nuevo Producto' : 'Editar Producto'}</h2>
+        <span class="modal-tag">${isNew ? 'Completa los datos del producto' : 'ID: ' + p.id}</span>
+        <div class="form-row">
+          <div class="form-group"><label>Nombre</label><input id="adm_name" value="${p ? p.name : ''}" placeholder="Nombre del producto" /></div>
+          <div class="form-group"><label>Subtítulo</label><input id="adm_subtitle" value="${p ? p.subtitle : ''}" placeholder="Ej: Pack de Presets" /></div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group"><label>Descripción Corta</label><input id="adm_desc" value="${p ? p.desc : ''}" placeholder="Descripción para la tarjeta" /></div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group"><label>Descripción Larga</label><input id="adm_longdesc" value="${p ? p.longDesc : ''}" placeholder="Descripción detallada" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Categoría</label>
+            <select id="adm_cat">${cats.map(c => `<option value="${c}" ${p&&p.cat===c?'selected':''}>${c.charAt(0).toUpperCase()+c.slice(1)}</option>`).join('')}</select>
+          </div>
+          <div class="form-group">
+            <label>Estado</label>
+            <select id="adm_status"><option value="active" ${!p||p.status==='active'?'selected':''}>Publicado</option><option value="draft" ${p&&p.status==='draft'?'selected':''}>Borrador</option></select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Precio ($)</label><input id="adm_price" type="number" step="0.01" min="0" value="${p ? p.price : '0'}" /></div>
+          <div class="form-group"><label>Precio Anterior ($)</label><input id="adm_oldprice" type="number" step="0.01" min="0" value="${p&&p.oldPrice ? p.oldPrice : ''}" placeholder="Dejar vacío si no hay" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Badge</label>
+            <select id="adm_badge"><option value="" ${!p||!p.badge?'selected':''}>Ninguno</option><option value="sale" ${p&&p.badge==='sale'?'selected':''}>Oferta</option><option value="free" ${p&&p.badge==='free'?'selected':''}>Gratis</option><option value="new" ${p&&p.badge==='new'?'selected':''}>Nuevo</option></select>
+          </div>
+          <div class="form-group"><label>Features (separar con |)</label><input id="adm_features" value="${p ? p.features.join('|') : ''}" placeholder="Feature 1|Feature 2|Feature 3" /></div>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:24px;">
+          <button class="btn-admin" onclick="saveProduct(${p ? p.id : 'null'})">${isNew ? 'Crear Producto' : 'Guardar Cambios'}</button>
+          <button class="btn-admin-outline" onclick="closeAdminModal(null,true)">Cancelar</button>
+        </div>`;
+      document.getElementById('adminModalOverlay').classList.add('active');
+    }
+
+    function closeAdminModal(e, force) {
+      if (force || (e && e.target === document.getElementById('adminModalOverlay')))
+        document.getElementById('adminModalOverlay').classList.remove('active');
+    }
+
+    function saveProduct(id) {
+      const name = document.getElementById('adm_name').value.trim();
+      if (!name) { showToast('El nombre es obligatorio'); return; }
+      const colorMap = { presets: { glow:'rgba(201,168,76,0.2)', accent:'#c9a84c' }, actions: { glow:'rgba(201,168,76,0.2)', accent:'#dbb85c' }, overlays: { glow:'rgba(74,107,181,0.2)', accent:'#4a6bb5' }, brushes: { glow:'rgba(61,90,153,0.2)', accent:'#3d5a99' } };
+      const cat = document.getElementById('adm_cat').value;
+      const colors = colorMap[cat] || colorMap.presets;
+      const price = parseFloat(document.getElementById('adm_price').value) || 0;
+      const oldP = document.getElementById('adm_oldprice').value;
+      const data = {
+        name, subtitle: document.getElementById('adm_subtitle').value.trim() || name,
+        desc: document.getElementById('adm_desc').value.trim(),
+        longDesc: document.getElementById('adm_longdesc').value.trim(),
+        cat, price, oldPrice: oldP ? parseFloat(oldP) : null,
+        badge: document.getElementById('adm_badge').value || null,
+        status: document.getElementById('adm_status').value,
+        features: document.getElementById('adm_features').value.split('|').map(f=>f.trim()).filter(Boolean),
+        glow: colors.glow, accent: colors.accent,
+      };
+
+      if (id) {
+        const p = products.find(pr => pr.id === id);
+        Object.assign(p, data);
+        showToast(`"${name}" actualizado`);
+      } else {
+        data.id = Math.max(...products.map(p => p.id), 0) + 1;
+        products.push(data);
+        showToast(`"${name}" creado`);
+      }
+      closeAdminModal(null, true);
+      renderAdminStats(); renderAdminTable(); renderProducts();
+    }
+
+    // ═══ TOAST ═══
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('visible');
+      setTimeout(() => toast.classList.remove('visible'), 3000);
+    }
+
+    function showSubscribeToast() {
+      const input = document.querySelector('.newsletter-form input');
+      if (input.value.includes('@')) { showToast('Suscripción confirmada. ¡Bienvenido!'); input.value=''; }
+      else { showToast('Introduce un email válido'); }
+    }
+
+    // ═══ INIT ═══
+    renderProducts();
+
+    // Check for payment return
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('payment') === 'success') {
+      setTimeout(() => {
+        showToast('✅ ¡Pago completado exitosamente! Revisa tu correo para descargar los archivos.');
+        cart = [];
+        updateCartCount();
+      }, 500);
+    }
+  </script>
+</body>
+</html>
