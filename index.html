@@ -70,6 +70,58 @@
       padding: 1px 5px; border-radius: 2px; min-width: 16px; text-align: center;
     }
 
+    /* ── LOGIN MODAL ── */
+    .login-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(12px); z-index: 2000; align-items: center; justify-content: center;
+    }
+    .login-overlay.active { display: flex; }
+    .login-box {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--card-radius);
+      padding: 48px 40px; width: 400px; max-width: 90vw; position: relative;
+    }
+    .login-box h2 {
+      font-size: 22px; font-weight: 200; letter-spacing: -0.5px; margin-bottom: 4px; text-align: center;
+    }
+    .login-box h2 strong { font-weight: 700; }
+    .login-subtitle { font-size: 12px; color: var(--text-muted); text-align: center; margin-bottom: 28px; letter-spacing: 1px; text-transform: uppercase; }
+    .login-divider { width: 30px; height: 1px; background: var(--accent); margin: 0 auto 28px; }
+    .login-field { margin-bottom: 16px; }
+    .login-field label {
+      display: block; font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--text-secondary); margin-bottom: 6px;
+    }
+    .login-field input {
+      width: 100%; padding: 12px 14px; background: var(--bg-primary); border: 1px solid var(--border);
+      border-radius: var(--card-radius); color: var(--text-primary); font-family: inherit; font-size: 14px;
+      transition: border-color var(--transition);
+    }
+    .login-field input:focus { outline: none; border-color: var(--accent); }
+    .login-btn {
+      width: 100%; padding: 14px; background: var(--accent); color: #0a0a0f; border: none;
+      font-family: inherit; font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 2px; cursor: pointer; border-radius: var(--card-radius);
+      transition: background var(--transition); margin-top: 8px;
+    }
+    .login-btn:hover { background: var(--accent-hover); }
+    .login-error {
+      display: none; color: var(--red); font-size: 12px; text-align: center;
+      margin-top: 12px; font-weight: 500;
+    }
+    .login-error.visible { display: block; }
+    .login-close {
+      position: absolute; top: 16px; right: 16px; background: none; border: none;
+      color: var(--text-muted); cursor: pointer; font-size: 20px; transition: color var(--transition);
+    }
+    .login-close:hover { color: var(--text-primary); }
+    .admin-logout {
+      display: inline-flex; align-items: center; gap: 6px; background: none; border: 1px solid var(--border);
+      color: var(--text-secondary); font-family: inherit; font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px; padding: 8px 16px; border-radius: var(--card-radius);
+      cursor: pointer; transition: all var(--transition);
+    }
+    .admin-logout:hover { border-color: var(--red); color: var(--red); }
+
     /* ── VIEWS ── */
     .view { display: none; }
     .view.active { display: block; }
@@ -580,18 +632,35 @@
       <a onclick="showView('store')">Productos</a>
       <a href="#">Sobre Mí</a>
       <a href="#">Tutoriales</a>
-      <a onclick="showView('admin')">Admin</a>
+      <a onclick="showLogin()">Login</a>
     </nav>
     <div class="header-actions">
-      <button onclick="showView('admin')" title="Panel Admin" style="font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase;">
-        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12.22 2h-.44a2 2 0 00-2 2v.18a2 2 0 01-1 1.73l-.43.25a2 2 0 01-2 0l-.15-.08a2 2 0 00-2.73.73l-.22.38a2 2 0 00.73 2.73l.15.1a2 2 0 011 1.72v.51a2 2 0 01-1 1.74l-.15.09a2 2 0 00-.73 2.73l.22.38a2 2 0 002.73.73l.15-.08a2 2 0 012 0l.43.25a2 2 0 011 1.73V20a2 2 0 002 2h.44a2 2 0 002-2v-.18a2 2 0 011-1.73l.43-.25a2 2 0 012 0l.15.08a2 2 0 002.73-.73l.22-.39a2 2 0 00-.73-2.73l-.15-.08a2 2 0 01-1-1.74v-.5a2 2 0 011-1.74l.15-.09a2 2 0 00.73-2.73l-.22-.38a2 2 0 00-2.73-.73l-.15.08a2 2 0 01-2 0l-.43-.25a2 2 0 01-1-1.73V4a2 2 0 00-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-      </button>
       <button onclick="showView('checkout')" title="Carrito" style="position:relative;">
         <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         <span class="cart-count" id="cartCount">0</span>
       </button>
     </div>
   </header>
+
+  <!-- ═══ LOGIN MODAL ═══ -->
+  <div class="login-overlay" id="loginOverlay" onclick="closeLogin(event)">
+    <div class="login-box" onclick="event.stopPropagation()">
+      <button class="login-close" onclick="closeLogin(null,true)">✕</button>
+      <h2>Panel <strong>Admin</strong></h2>
+      <div class="login-subtitle">Acceso exclusivo para administradores</div>
+      <div class="login-divider"></div>
+      <div class="login-field">
+        <label>Usuario</label>
+        <input type="text" id="loginUser" placeholder="Ingresa tu usuario" autocomplete="off" />
+      </div>
+      <div class="login-field">
+        <label>Contraseña</label>
+        <input type="password" id="loginPass" placeholder="Ingresa tu contraseña" onkeydown="if(event.key==='Enter')doLogin()" />
+      </div>
+      <button class="login-btn" onclick="doLogin()">Iniciar Sesión</button>
+      <div class="login-error" id="loginError">⚠ Usuario o contraseña incorrectos</div>
+    </div>
+  </div>
 
   <!-- ═══ STORE VIEW ═══ -->
   <div id="storeView" class="view active">
@@ -656,7 +725,10 @@
   <!-- ═══ ADMIN VIEW ═══ -->
   <div id="adminView" class="view">
     <div class="admin-page">
-      <button class="checkout-back" onclick="showView('store')">← Volver a la tienda</button>
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+        <button class="checkout-back" onclick="showView('store')" style="margin-bottom:0;">← Volver a la tienda</button>
+        <button class="admin-logout" onclick="doLogout()">🔒 Cerrar Sesión</button>
+      </div>
       <h1>Panel de <strong>Administración</strong></h1>
       <p class="admin-subtitle">Gestiona tus productos digitales y configura pasarelas de pago.</p>
 
@@ -1001,9 +1073,62 @@
     let cart = [];
     let activeCategory = 'all';
     let selectedPayment = 'stripe';
+    let isAdminLoggedIn = false;
+
+    // ═══ LOGIN SYSTEM ═══
+    const ADMIN_USER = 'admin';
+    const ADMIN_PASS = 'admin';
+
+    function showLogin() {
+      if (isAdminLoggedIn) {
+        showView('admin');
+        return;
+      }
+      document.getElementById('loginOverlay').classList.add('active');
+      document.getElementById('loginUser').value = '';
+      document.getElementById('loginPass').value = '';
+      document.getElementById('loginError').classList.remove('visible');
+      setTimeout(() => document.getElementById('loginUser').focus(), 100);
+    }
+
+    function closeLogin(e, force) {
+      if (force || (e && e.target === document.getElementById('loginOverlay'))) {
+        document.getElementById('loginOverlay').classList.remove('active');
+      }
+    }
+
+    function doLogin() {
+      const user = document.getElementById('loginUser').value.trim();
+      const pass = document.getElementById('loginPass').value;
+      if (user === ADMIN_USER && pass === ADMIN_PASS) {
+        isAdminLoggedIn = true;
+        document.getElementById('loginOverlay').classList.remove('active');
+        showToast('✅ Bienvenido, Administrador');
+        // Update nav link to show "Admin" when logged in
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks[navLinks.length - 1].textContent = 'Admin ✓';
+        showView('admin');
+      } else {
+        document.getElementById('loginError').classList.add('visible');
+        document.getElementById('loginPass').value = '';
+        document.getElementById('loginPass').focus();
+      }
+    }
+
+    function doLogout() {
+      isAdminLoggedIn = false;
+      const navLinks = document.querySelectorAll('.nav-links a');
+      navLinks[navLinks.length - 1].textContent = 'Login';
+      showToast('🔒 Sesión cerrada correctamente');
+      showView('store');
+    }
 
     // ═══ VIEW MANAGEMENT ═══
     function showView(view) {
+      if (view === 'admin' && !isAdminLoggedIn) {
+        showLogin();
+        return;
+      }
       document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
       document.getElementById(view + 'View').classList.add('active');
       window.scrollTo(0, 0);
