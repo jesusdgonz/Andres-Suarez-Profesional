@@ -311,6 +311,139 @@
     .btn-primary.free:hover { background: #34c47e; }
     .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
 
+    /* ── PRODUCT DETAIL VIEW ── */
+    .product-detail-page { max-width: 1200px; margin: 0 auto; padding: 32px 40px 80px; }
+    .pd-back {
+      display: inline-flex; align-items: center; gap: 8px; color: var(--accent); text-decoration: none;
+      font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;
+      margin-bottom: 32px; cursor: pointer; transition: color var(--transition); border: none; background: none; font-family: inherit;
+    }
+    .pd-back:hover { color: var(--accent-hover); }
+    .pd-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .pd-gallery { position: sticky; top: 88px; }
+    .pd-main-image {
+      width: 100%; aspect-ratio: 4/3; background: linear-gradient(145deg, #0d0d14, #161620);
+      border: 1px solid var(--border); border-radius: var(--card-radius); overflow: hidden;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 12px; position: relative;
+      cursor: zoom-in;
+    }
+    .pd-main-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease, opacity 0.15s ease; }
+    .pd-main-image:hover img { transform: scale(1.05); }
+    .pd-main-image .pd-nav-btn {
+      position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px;
+      background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.1); color: #fff;
+      font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: all var(--transition); z-index: 2; border-radius: var(--card-radius);
+    }
+    .pd-main-image .pd-nav-btn:hover { background: rgba(0,0,0,0.9); border-color: var(--accent); }
+    .pd-nav-btn.prev { left: 12px; }
+    .pd-nav-btn.next { right: 12px; }
+    .pd-image-counter {
+      position: absolute; bottom: 12px; right: 12px; background: rgba(0,0,0,0.7);
+      padding: 4px 10px; font-size: 11px; color: rgba(255,255,255,0.7); border-radius: 2px;
+      letter-spacing: 1px;
+    }
+    .pd-thumbnails { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+    .pd-thumbnails::-webkit-scrollbar { height: 4px; }
+    .pd-thumbnails::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    .pd-thumb {
+      width: 80px; height: 60px; flex-shrink: 0; border: 2px solid var(--border);
+      border-radius: var(--card-radius); overflow: hidden; cursor: pointer;
+      transition: all var(--transition); opacity: 0.5;
+    }
+    .pd-thumb:hover { opacity: 0.8; border-color: #2a2a38; }
+    .pd-thumb.active { opacity: 1; border-color: var(--accent); }
+    .pd-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .pd-thumb-placeholder {
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(145deg, #0d0d14, #161620); font-size: 8px; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+
+    .pd-info { padding-top: 8px; }
+    .pd-badge-row { display: flex; gap: 8px; margin-bottom: 16px; }
+    .pd-badge {
+      padding: 4px 12px; font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .pd-badge-sale { background: var(--accent); color: #0a0a0f; }
+    .pd-badge-free { background: var(--green); color: #fff; }
+    .pd-badge-new { background: var(--blue-light); color: #fff; }
+    .pd-badge-cat { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border); }
+    .pd-title { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px; line-height: 1.2; }
+    .pd-subtitle { font-size: 14px; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; margin-bottom: 20px; }
+    .pd-description { font-size: 15px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 28px; }
+    .pd-price-box {
+      display: flex; align-items: baseline; gap: 14px; margin-bottom: 28px;
+      padding: 20px; background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+    }
+    .pd-price-current { font-size: 36px; font-weight: 700; color: var(--text-primary); }
+    .pd-price-old { font-size: 20px; color: var(--text-muted); text-decoration: line-through; }
+    .pd-price-save {
+      font-size: 12px; font-weight: 700; color: var(--green); background: rgba(46,168,111,0.1);
+      padding: 4px 10px; border-radius: 2px; margin-left: auto;
+    }
+    .pd-buttons { display: flex; gap: 12px; margin-bottom: 32px; }
+    .pd-btn-cart {
+      flex: 1; padding: 16px; background: var(--accent); color: #0a0a0f; border: none;
+      font-size: 13px; font-weight: 700; cursor: pointer; transition: background var(--transition);
+      font-family: inherit; text-transform: uppercase; letter-spacing: 2px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .pd-btn-cart:hover { background: var(--accent-hover); }
+    .pd-btn-cart.free { background: var(--green); color: #fff; }
+    .pd-btn-cart.free:hover { background: #34c47e; }
+    .pd-btn-buy {
+      flex: 1; padding: 16px; background: transparent; color: var(--accent); 
+      border: 2px solid var(--accent); font-size: 13px; font-weight: 700; cursor: pointer;
+      transition: all var(--transition); font-family: inherit; text-transform: uppercase; letter-spacing: 2px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .pd-btn-buy:hover { background: var(--accent); color: #0a0a0f; }
+    .pd-features-title {
+      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
+      color: var(--text-secondary); margin-bottom: 16px;
+    }
+    .pd-features {
+      list-style: none; padding: 0; margin-bottom: 28px;
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+    }
+    .pd-features li {
+      padding: 14px 20px; font-size: 14px; display: flex; align-items: center; gap: 12px;
+      color: var(--text-secondary); transition: background var(--transition);
+    }
+    .pd-features li:hover { background: rgba(255,255,255,0.02); }
+    .pd-features li::before { content: '✓'; color: var(--accent); font-weight: 700; font-size: 14px; }
+    .pd-features li + li { border-top: 1px solid var(--border); }
+    .pd-trust { display: flex; gap: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .pd-trust-item { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+    .pd-trust-icon { font-size: 16px; }
+
+    /* Lightbox */
+    .pd-lightbox {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+      z-index: 3000; align-items: center; justify-content: center; cursor: zoom-out;
+    }
+    .pd-lightbox.active { display: flex; }
+    .pd-lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
+    .pd-lightbox-close {
+      position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;
+      background: rgba(255,255,255,0.1); border: none; color: #fff; font-size: 20px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      border-radius: var(--card-radius);
+    }
+
+    @media (max-width: 768px) {
+      .pd-layout { grid-template-columns: 1fr; gap: 32px; }
+      .pd-gallery { position: static; }
+      .pd-title { font-size: 24px; }
+      .pd-price-current { font-size: 28px; }
+      .pd-buttons { flex-direction: column; }
+      .product-detail-page { padding: 20px 20px 60px; }
+    }
+
     /* ── CART / CHECKOUT VIEW ── */
     .checkout-page { max-width: 1100px; margin: 0 auto; padding: 48px 40px 80px; }
     .checkout-page h1 { font-size: 28px; font-weight: 200; letter-spacing: -0.5px; margin-bottom: 8px; }
@@ -570,6 +703,8 @@
       box-shadow: 0 30px 80px rgba(0,0,0,0.5); padding: 32px;
     }
     .admin-modal h2 { font-size: 18px; font-weight: 600; margin-bottom: 4px; letter-spacing: -0.3px; }
+    .gallery-row input { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:var(--text); padding:8px 12px; border-radius:8px; font-size:13px; }
+    .gallery-row input:focus { border-color:var(--gold); outline:none; }
     .admin-modal .modal-tag { margin-bottom: 24px; }
 
     /* Stats cards */
@@ -618,6 +753,102 @@
     ::-webkit-scrollbar-track { background: var(--bg-primary); }
     ::-webkit-scrollbar-thumb { background: #2a2a38; border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: #3a3a4a; }
+
+    /* ── THANK YOU PAGE ── */
+    .thankyou-page {
+      max-width: 680px; margin: 60px auto; padding: 0 24px;
+    }
+    .thankyou-icon {
+      width: 90px; height: 90px; border-radius: 50%;
+      background: rgba(46,168,111,0.15); border: 2px solid var(--green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 42px; margin: 0 auto 28px;
+      animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes scaleIn {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .thankyou-page h1 {
+      font-size: 28px; font-weight: 300; text-align: center;
+      margin-bottom: 8px; letter-spacing: 1px;
+    }
+    .thankyou-page h1 strong { color: var(--accent); font-weight: 600; }
+    .thankyou-subtitle {
+      text-align: center; color: var(--text-secondary); font-size: 14px;
+      margin-bottom: 36px;
+    }
+    .order-info {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--card-radius); padding: 24px; margin-bottom: 24px;
+    }
+    .order-info-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+    }
+    .order-number { font-size: 12px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; }
+    .order-number span { color: var(--accent); font-weight: 600; }
+    .order-method { font-size: 12px; color: var(--text-secondary); }
+    .order-method span { color: var(--green); font-weight: 500; }
+    .order-items { display: flex; flex-direction: column; gap: 12px; }
+    .order-item {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 14px;
+    }
+    .order-item-name { color: var(--text-primary); }
+    .order-item-price { color: var(--accent); font-weight: 600; }
+    .order-total {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 16px; font-weight: 600;
+    }
+    .order-total span:last-child { color: var(--accent); }
+
+    .download-section {
+      margin-top: 32px;
+    }
+    .download-section h3 {
+      font-size: 14px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--text-secondary);
+      margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+    }
+    .download-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--card-radius); padding: 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px; transition: border-color var(--transition);
+    }
+    .download-card:hover { border-color: var(--accent); }
+    .download-card-info { display: flex; align-items: center; gap: 16px; }
+    .download-card-icon {
+      width: 48px; height: 48px; background: rgba(201,168,76,0.1);
+      border-radius: var(--card-radius); display: flex; align-items: center;
+      justify-content: center; font-size: 22px;
+    }
+    .download-card-name { font-size: 14px; font-weight: 500; color: var(--text-primary); }
+    .download-card-type { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .btn-download {
+      background: var(--accent); color: #0a0a0f; border: none;
+      padding: 10px 24px; font-size: 12px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+      transition: all var(--transition); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-download:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .download-note {
+      text-align: center; font-size: 12px; color: var(--text-muted);
+      margin-top: 24px; line-height: 1.8;
+    }
+    .download-note a { color: var(--accent); text-decoration: none; }
+    .btn-back-store {
+      display: block; width: fit-content; margin: 32px auto 0;
+      background: transparent; border: 1px solid var(--border);
+      color: var(--text-secondary); padding: 12px 32px;
+      font-size: 12px; font-weight: 500; letter-spacing: 1px;
+      text-transform: uppercase; cursor: pointer;
+      transition: all var(--transition);
+    }
+    .btn-back-store:hover { border-color: var(--accent); color: var(--text-primary); }
   </style>
 </head>
 <body>
@@ -713,6 +944,20 @@
     </footer>
   </div>
 
+  <!-- ═══ PRODUCT DETAIL VIEW ═══ -->
+  <div id="productDetailView" class="view">
+    <div class="product-detail-page">
+      <button class="pd-back" onclick="showView('store')">← Volver al catálogo</button>
+      <div id="productDetailContent"></div>
+    </div>
+  </div>
+
+  <!-- Lightbox for zoomed image -->
+  <div class="pd-lightbox" id="pdLightbox" onclick="closeLightbox()">
+    <button class="pd-lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="pdLightboxImg" src="" alt="Zoom" />
+  </div>
+
   <!-- ═══ CHECKOUT VIEW ═══ -->
   <div id="checkoutView" class="view">
     <div class="checkout-page">
@@ -721,6 +966,9 @@
       <div id="checkoutContent"></div>
     </div>
   </div>
+
+  <!-- ═══ THANK YOU VIEW ═══ -->
+  <div id="thankyouView" class="view"><div class="thankyou-page" id="thankyouContent"></div></div>
 
   <!-- ═══ ADMIN VIEW ═══ -->
   <div id="adminView" class="view">
@@ -1062,18 +1310,19 @@
     // DATA
     // ═══════════════════════════════════════════════════════
     let products = [
-      { id:1, name:"Cinematic LUTs Free", subtitle:"Pack de LUTs Gratuitos", desc:"5 LUTs cinematográficos para darle un look profesional a tus fotos.", longDesc:"Pack de iniciación con 5 LUTs inspirados en el cine. Compatibles con Lightroom, Photoshop y Capture One.", features:["5 LUTs cinematográficos","Compatible con Lightroom & Photoshop","Guía de instalación incluida","Uso comercial permitido"], price:0, oldPrice:null, badge:"free", cat:"presets", glow:"rgba(46,168,111,0.2)", accent:"#2ea86f", status:"active" },
-      { id:2, name:"ChromaPreset Pro", subtitle:"Pack de Presets Premium", desc:"+30 presets profesionales para retrato y moda con acabado editorial.", longDesc:"Colección premium de 30+ presets diseñados para fotografía de retrato y moda.", features:["30+ presets premium","Ajustes de piel avanzados","Perfiles de cámara incluidos","Soporte prioritario","Actualizaciones gratuitas"], price:24.00, oldPrice:39.00, badge:"sale", cat:"presets", glow:"rgba(201,168,76,0.2)", accent:"#c9a84c", status:"active" },
-      { id:3, name:"RetouchKit", subtitle:"Actions de Retoque", desc:"Pack de 20 actions para retoque profesional de piel y ojos en Photoshop.", longDesc:"Kit completo de retoque con 20 acciones automatizadas.", features:["20 actions de retoque","Frequency Separation incluido","Dodge & Burn automático","Tutorial paso a paso","Compatible con PS 2022+"], price:19.00, oldPrice:29.00, badge:"sale", cat:"actions", glow:"rgba(201,168,76,0.2)", accent:"#dbb85c", status:"active" },
-      { id:4, name:"LightLeaks Vol.1", subtitle:"Overlays de Luz", desc:"50 overlays de fugas de luz orgánicas en alta resolución.", longDesc:"Colección artesanal de 50 fugas de luz capturadas con lentes vintage.", features:["50 overlays en alta resolución","Formato PNG transparente","6000x4000px","Lentes vintage reales","Uso comercial incluido"], price:14.00, oldPrice:null, badge:"new", cat:"overlays", glow:"rgba(74,107,181,0.2)", accent:"#4a6bb5", status:"active" },
-      { id:5, name:"FilmGrain Pack", subtitle:"Texturas Analógicas", desc:"Texturas de grano de película escaneadas de film 35mm y medio formato.", longDesc:"Grano auténtico escaneado de película Kodak Portra, Fuji Pro y Ilford HP5.", features:["40 texturas de grano","Escaneado de film real","Kodak, Fuji & Ilford","Texturas de polvo extra","Resolución 8K"], price:12.00, oldPrice:19.00, badge:"sale", cat:"overlays", glow:"rgba(201,168,76,0.15)", accent:"#c9a84c", status:"active" },
-      { id:6, name:"SkinBrush Pro", subtitle:"Brushes para Piel", desc:"Set de 15 brushes especializados para retoque de piel natural.", longDesc:"Pinceles personalizados para Photoshop diseñados para retoque de piel realista.", features:["15 brushes personalizados","Textura de piel realista","Sensibilidad a presión","Presets de opacidad","Tutorial de uso incluido"], price:9.00, oldPrice:null, badge:null, cat:"brushes", glow:"rgba(61,90,153,0.2)", accent:"#3d5a99", status:"active" }
+      { id:1, name:"Cinematic LUTs Free", subtitle:"Pack de LUTs Gratuitos", desc:"5 LUTs cinematográficos para darle un look profesional a tus fotos.", longDesc:"Pack de iniciación con 5 LUTs cinematográficos inspirados en el cine. Compatibles con Lightroom, Photoshop y Capture One. Cada LUT ha sido cuidadosamente calibrado para ofrecer tonos naturales con un toque cinematográfico que transforma tus fotos al instante.", features:["5 LUTs cinematográficos","Compatible con Lightroom & Photoshop","Guía de instalación incluida","Uso comercial permitido"], price:0, oldPrice:null, badge:"free", cat:"presets", glow:"rgba(46,168,111,0.2)", accent:"#2ea86f", status:"active", downloadUrl:"https://drive.google.com/uc?export=download&id=EXAMPLE_FILE_ID_1", images:["https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1493863641943-9b68992a8d07?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1554080353-a576cf803bda?w=800&h=600&fit=crop"] },
+      { id:2, name:"ChromaPreset Pro", subtitle:"Pack de Presets Premium", desc:"+30 presets profesionales para retrato y moda con acabado editorial.", longDesc:"Colección premium de 30+ presets diseñados para fotografía de retrato y moda. Ajustes avanzados de piel, tonos cálidos y fríos, y perfiles de cámara que entregan resultados editoriales de forma inmediata. Ideal para sesiones de estudio y exteriores.", features:["30+ presets premium","Ajustes de piel avanzados","Perfiles de cámara incluidos","Soporte prioritario","Actualizaciones gratuitas"], price:24.00, oldPrice:39.00, badge:"sale", cat:"presets", glow:"rgba(201,168,76,0.2)", accent:"#c9a84c", status:"active", downloadUrl:"https://drive.google.com/uc?export=download&id=EXAMPLE_FILE_ID_2", images:["https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop"] },
+      { id:3, name:"RetouchKit", subtitle:"Actions de Retoque", desc:"Pack de 20 actions para retoque profesional de piel y ojos en Photoshop.", longDesc:"Kit completo de retoque con 20 acciones automatizadas para Photoshop. Incluye Frequency Separation avanzado, Dodge & Burn automático, mejora de ojos, suavizado de piel y corrección de color. Cada action está optimizada para mantener la textura natural.", features:["20 actions de retoque","Frequency Separation incluido","Dodge & Burn automático","Tutorial paso a paso","Compatible con PS 2022+"], price:19.00, oldPrice:29.00, badge:"sale", cat:"actions", glow:"rgba(201,168,76,0.2)", accent:"#dbb85c", status:"active", downloadUrl:"https://drive.google.com/uc?export=download&id=EXAMPLE_FILE_ID_3", images:["https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1552168324-d612d77725e3?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1595152772835-219674b2a8a6?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&h=600&fit=crop"] },
+      { id:4, name:"LightLeaks Vol.1", subtitle:"Overlays de Luz", desc:"50 overlays de fugas de luz orgánicas en alta resolución.", longDesc:"Colección artesanal de 50 fugas de luz capturadas con lentes vintage reales. Cada overlay ha sido fotografiado con Helios 44-2 y Pentacon 50mm para lograr bokeh y flares orgánicos únicos. Resolución 6000x4000px lista para uso profesional.", features:["50 overlays en alta resolución","Formato PNG transparente","6000x4000px","Lentes vintage reales","Uso comercial incluido"], price:14.00, oldPrice:null, badge:"new", cat:"overlays", glow:"rgba(74,107,181,0.2)", accent:"#4a6bb5", status:"active", downloadUrl:"https://drive.google.com/uc?export=download&id=EXAMPLE_FILE_ID_4", images:["https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=800&h=600&fit=crop"] },
+      { id:5, name:"FilmGrain Pack", subtitle:"Texturas Analógicas", desc:"Texturas de grano de película escaneadas de film 35mm y medio formato.", longDesc:"Grano auténtico escaneado de película Kodak Portra, Fuji Pro e Ilford HP5. Incluye variantes de ISO 100 a 3200 con grano fino y grueso. También incluye texturas de polvo y scratches para un look analógico completo en resolución 8K.", features:["40 texturas de grano","Escaneado de film real","Kodak, Fuji & Ilford","Texturas de polvo extra","Resolución 8K"], price:12.00, oldPrice:19.00, badge:"sale", cat:"overlays", glow:"rgba(201,168,76,0.15)", accent:"#c9a84c", status:"active", downloadUrl:"https://drive.google.com/uc?export=download&id=EXAMPLE_FILE_ID_5", images:["https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?w=800&h=600&fit=crop"] },
+      { id:6, name:"SkinBrush Pro", subtitle:"Brushes para Piel", desc:"Set de 15 brushes especializados para retoque de piel natural.", longDesc:"Pinceles personalizados para Photoshop diseñados para retoque de piel realista. Incluye brushes para frecuencia alta, frecuencia baja, textura de poros, y suavizado natural. Cada brush tiene sensibilidad a presión calibrada para tabletas Wacom e iPad.", features:["15 brushes personalizados","Textura de piel realista","Sensibilidad a presión","Presets de opacidad","Tutorial de uso incluido"], price:9.00, oldPrice:null, badge:null, cat:"brushes", glow:"rgba(61,90,153,0.2)", accent:"#3d5a99", status:"active", downloadUrl:"https://drive.google.com/uc?export=download&id=EXAMPLE_FILE_ID_6", images:["https://images.unsplash.com/photo-1596704017254-9b121068fb31?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&h=600&fit=crop","https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?w=800&h=600&fit=crop"] }
     ];
 
     let cart = [];
     let activeCategory = 'all';
     let selectedPayment = 'stripe';
     let isAdminLoggedIn = false;
+    let lastOrder = null;
 
     // ═══ LOGIN SYSTEM ═══
     const ADMIN_USER = 'admin';
@@ -1133,6 +1382,7 @@
       document.getElementById(view + 'View').classList.add('active');
       window.scrollTo(0, 0);
       if (view === 'checkout') renderCheckout();
+      if (view === 'thankyou') renderThankYou();
       if (view === 'admin') { renderAdminStats(); renderAdminTable(); loadConfigFields(); }
     }
 
@@ -1152,16 +1402,18 @@
       const filtered = activeCategory === 'all' ? active : active.filter(p => p.cat === activeCategory);
       document.getElementById('productCount').textContent = filtered.length + ' producto' + (filtered.length !== 1 ? 's' : '');
       grid.innerHTML = filtered.map(p => `
-        <div class="product-card" onclick="openModal(${p.id})">
+        <div class="product-card" onclick="openProduct(${p.id})">
           ${p.badge ? `<span class="badge badge-${p.badge}">${p.badge==='sale'?'Oferta':p.badge==='free'?'Gratis':'Nuevo'}</span>` : ''}
           <div class="product-image">
-            <div class="box-art" style="background:linear-gradient(145deg,#0d0d14,#161620);">
-              <div class="box-inner" style="--glow-color:${p.glow}">
-                <div class="box-subtitle">${p.subtitle}</div>
-                <div class="box-title" style="background:linear-gradient(135deg,#fff,${p.accent});-webkit-background-clip:text;-webkit-text-fill-color:transparent;">${p.name}</div>
-                <div class="box-badge-corner">${p.cat.toUpperCase()}</div>
-              </div>
-            </div>
+            ${p.images && p.images.length > 0
+              ? `<img src="${p.images[0]}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />`
+              : `<div class="box-art" style="background:linear-gradient(145deg,#0d0d14,#161620);">
+                <div class="box-inner" style="--glow-color:${p.glow}">
+                  <div class="box-subtitle">${p.subtitle}</div>
+                  <div class="box-title" style="background:linear-gradient(135deg,#fff,${p.accent});-webkit-background-clip:text;-webkit-text-fill-color:transparent;">${p.name}</div>
+                  <div class="box-badge-corner">${p.cat.toUpperCase()}</div>
+                </div>
+              </div>`}
           </div>
           <div class="product-info">
             <div class="product-name">${p.name}</div>
@@ -1186,41 +1438,154 @@
       }
     });
 
-    // ═══ PRODUCT MODAL ═══
-    function openModal(id) {
+    // ═══ PRODUCT DETAIL VIEW ═══
+    let currentProductId = null;
+    let currentImageIndex = 0;
+
+    function openProduct(id) {
       const p = products.find(pr => pr.id === id);
       if (!p) return;
-      document.getElementById('modal').innerHTML = `
-        <div class="modal-image" style="background:linear-gradient(145deg,#0d0d14,#161620);">
-          <button class="modal-close" onclick="closeModal(event,true)">✕</button>
-          <div class="box-inner" style="--glow-color:${p.glow};width:200px;height:120px;border:1px solid rgba(255,255,255,0.06);">
-            <div class="box-subtitle">${p.subtitle}</div>
-            <div class="box-title" style="font-size:18px;background:linear-gradient(135deg,#fff,${p.accent});-webkit-background-clip:text;-webkit-text-fill-color:transparent;">${p.name}</div>
+      currentProductId = id;
+      currentImageIndex = 0;
+      const imgs = p.images || [];
+      const hasImages = imgs.length > 0;
+      const savePct = p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
+
+      document.getElementById('productDetailContent').innerHTML = `
+        <div class="pd-layout">
+          <div class="pd-gallery">
+            <div class="pd-main-image" onclick="openLightbox()">
+              ${hasImages
+                ? `<img id="pdMainImg" src="${imgs[0]}" alt="${p.name}" />`
+                : `<div class="box-inner" style="--glow-color:${p.glow};width:240px;height:160px;border:1px solid rgba(255,255,255,0.06);">
+                    <div class="box-subtitle">${p.subtitle}</div>
+                    <div class="box-title" style="font-size:22px;background:linear-gradient(135deg,#fff,${p.accent});-webkit-background-clip:text;-webkit-text-fill-color:transparent;">${p.name}</div>
+                  </div>`}
+              ${imgs.length > 1 ? `
+                <button class="pd-nav-btn prev" onclick="event.stopPropagation();changeImage(-1)">‹</button>
+                <button class="pd-nav-btn next" onclick="event.stopPropagation();changeImage(1)">›</button>
+                <div class="pd-image-counter"><span id="pdImgIdx">1</span> / ${imgs.length}</div>
+              ` : ''}
+            </div>
+            ${imgs.length > 1 ? `
+              <div class="pd-thumbnails" id="pdThumbs">
+                ${imgs.map((img, i) => `
+                  <div class="pd-thumb ${i === 0 ? 'active' : ''}" onclick="goToImage(${i})">
+                    <img src="${img}" alt="Vista ${i + 1}" />
+                  </div>
+                `).join('')}
+              </div>
+            ` : ''}
           </div>
-        </div>
-        <div class="modal-body">
-          <h2>${p.name}</h2>
-          <span class="modal-tag">${p.subtitle}</span>
-          <p class="modal-desc">${p.longDesc}</p>
-          <ul class="modal-features">${p.features.map(f => `<li>${f}</li>`).join('')}</ul>
-          <div class="modal-price-row">
-            <div class="product-price">
-              <span class="price-current" style="font-size:26px">${fmt(p.price)}</span>
-              ${p.oldPrice ? `<span class="price-old" style="font-size:16px">${fmt(p.oldPrice)}</span>` : ''}
+          <div class="pd-info">
+            <div class="pd-badge-row">
+              ${p.badge ? `<span class="pd-badge pd-badge-${p.badge}">${p.badge === 'sale' ? '🔥 Oferta' : p.badge === 'free' ? '🎁 Gratis' : '✨ Nuevo'}</span>` : ''}
+              <span class="pd-badge pd-badge-cat">${p.cat.toUpperCase()}</span>
+            </div>
+            <h1 class="pd-title">${p.name}</h1>
+            <div class="pd-subtitle">${p.subtitle}</div>
+            <p class="pd-description">${p.longDesc}</p>
+            <div class="pd-price-box">
+              <span class="pd-price-current">${fmt(p.price)}</span>
+              ${p.oldPrice ? `<span class="pd-price-old">${fmt(p.oldPrice)}</span>` : ''}
+              ${savePct > 0 ? `<span class="pd-price-save">-${savePct}% OFF</span>` : ''}
+            </div>
+            <div class="pd-buttons">
+              <button class="pd-btn-cart ${p.price === 0 ? 'free' : ''}" onclick="addToCartFromDetail(${p.id})">
+                ${p.price === 0 ? '⬇ Descargar Gratis' : '🛒 Añadir al Carrito'}
+              </button>
+              ${p.price > 0 ? `<button class="pd-btn-buy" onclick="buyNow(${p.id})">⚡ Comprar Ya</button>` : ''}
+            </div>
+            <div class="pd-features-title">Incluye</div>
+            <ul class="pd-features">
+              ${p.features.map(f => `<li>${f}</li>`).join('')}
+            </ul>
+            <div class="pd-trust">
+              <div class="pd-trust-item"><span class="pd-trust-icon">⬇</span> Descarga inmediata</div>
+              <div class="pd-trust-item"><span class="pd-trust-icon">🛡</span> Pago seguro</div>
+              <div class="pd-trust-item"><span class="pd-trust-icon">♻</span> Updates gratis</div>
             </div>
           </div>
-          <button class="btn-primary ${p.price===0?'free':''}" onclick="addToCart(${p.id})">${p.price===0?'Descargar Gratis':'Añadir al Carrito'}</button>
         </div>`;
-      document.getElementById('modalOverlay').classList.add('active');
+      showView('productDetail');
     }
 
+    function changeImage(dir) {
+      const p = products.find(pr => pr.id === currentProductId);
+      if (!p || !p.images) return;
+      currentImageIndex = (currentImageIndex + dir + p.images.length) % p.images.length;
+      updateMainImage(p);
+    }
+
+    function goToImage(idx) {
+      const p = products.find(pr => pr.id === currentProductId);
+      if (!p || !p.images) return;
+      currentImageIndex = idx;
+      updateMainImage(p);
+    }
+
+    function updateMainImage(p) {
+      const mainImg = document.getElementById('pdMainImg');
+      if (mainImg) {
+        mainImg.style.opacity = '0';
+        setTimeout(() => {
+          mainImg.src = p.images[currentImageIndex];
+          mainImg.style.opacity = '1';
+        }, 150);
+      }
+      const idxEl = document.getElementById('pdImgIdx');
+      if (idxEl) idxEl.textContent = currentImageIndex + 1;
+      document.querySelectorAll('.pd-thumb').forEach((t, i) => {
+        t.classList.toggle('active', i === currentImageIndex);
+      });
+    }
+
+    function openLightbox() {
+      const p = products.find(pr => pr.id === currentProductId);
+      if (!p || !p.images || !p.images.length) return;
+      document.getElementById('pdLightboxImg').src = p.images[currentImageIndex];
+      document.getElementById('pdLightbox').classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('pdLightbox').classList.remove('active');
+    }
+
+    // Keyboard navigation for carousel & lightbox
+    document.addEventListener('keydown', (e) => {
+      if (document.getElementById('pdLightbox').classList.contains('active')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') changeImage(-1);
+        if (e.key === 'ArrowRight') changeImage(1);
+        return;
+      }
+      const detailView = document.getElementById('productDetailView');
+      if (detailView && detailView.classList.contains('active')) {
+        if (e.key === 'ArrowLeft') changeImage(-1);
+        if (e.key === 'ArrowRight') changeImage(1);
+      }
+    });
+
+    function addToCartFromDetail(id) {
+      addToCart(id, true);
+      const p = products.find(pr => pr.id === id);
+      showToast(p && p.price === 0 ? `⬇ "${p.name}" — Descarga lista` : `🛒 "${p.name}" añadido al carrito`);
+    }
+
+    function buyNow(id) {
+      addToCart(id, true);
+      showView('checkout');
+    }
+
+    // Legacy modal support (keep for compatibility)
+    function openModal(id) { openProduct(id); }
     function closeModal(e, force) {
       if (force || e.target === document.getElementById('modalOverlay'))
         document.getElementById('modalOverlay').classList.remove('active');
     }
 
     // ═══ CART ═══
-    function addToCart(id) {
+    function addToCart(id, silent) {
       const p = products.find(pr => pr.id === id);
       if (!p) return;
       const existing = cart.find(c => c.id === id);
@@ -1228,7 +1593,7 @@
       else { cart.push({ ...p, qty: 1 }); }
       updateCartCount();
       document.getElementById('modalOverlay').classList.remove('active');
-      showToast(p.price === 0 ? `"${p.name}" — Descarga lista` : `"${p.name}" añadido al carrito`);
+      if (!silent) showToast(p.price === 0 ? `"${p.name}" — Descarga lista` : `"${p.name}" añadido al carrito`);
     }
 
     function removeFromCart(id) {
@@ -1384,6 +1749,14 @@
                   </div>
                   <span class="payment-status ${yappyOk?'configured':'pending'}">${yappyOk?'Activo':'Pendiente'}</span>
                 </div>
+                <div class="payment-option ${selectedPayment==='test'?'selected':''}" onclick="selectPayment('test')" style="border-color:#f59e0b;">
+                  <div class="payment-radio"></div>
+                  <div style="flex:1;">
+                    <div class="payment-label">🧪 Pago de Prueba</div>
+                    <div class="payment-desc">Simular compra exitosa — solo para testing</div>
+                  </div>
+                  <span class="payment-status configured" style="background:rgba(245,158,11,0.15);color:#f59e0b;">Test</span>
+                </div>
               </div>
 
               <!-- Dynamic Payment Area -->
@@ -1453,6 +1826,17 @@
           </button>
           <div style="text-align:center;margin-top:8px;font-size:10px;color:var(--text-muted);">
             Se generará una solicitud de pago en tu app Yappy
+          </div>`;
+      } else if (selectedPayment === 'test') {
+        area.innerHTML = `
+          <div style="background:rgba(245,158,11,0.1);border:1px dashed #f59e0b;border-radius:12px;padding:16px;margin-top:12px;text-align:center;">
+            <div style="font-size:12px;color:#f59e0b;margin-bottom:8px;">⚠️ MODO DE PRUEBA — No se realizará ningún cobro real</div>
+            <button onclick="processTestPayment()" id="testPayBtn" style="
+              background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:700;
+              border:none;padding:14px 32px;border-radius:10px;font-size:15px;cursor:pointer;
+              width:100%;transition:all 0.3s;">
+              🧪 Simular Pago Exitoso — ${fmt(total)}
+            </button>
           </div>`;
       }
     }
@@ -1703,12 +2087,100 @@
       }, 10000); // Check every 10 seconds
     }
 
+    // ── TEST PAYMENT ──
+    function processTestPayment() {
+      const btn = document.getElementById('testPayBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ Procesando pago de prueba...';
+      setTimeout(() => {
+        btn.textContent = '✅ ¡Pago simulado exitoso!';
+        setTimeout(() => processOrderSuccess('Test (Prueba)'), 800);
+      }, 1500);
+    }
+
     // ═══ ORDER SUCCESS ═══
     function processOrderSuccess(method) {
-      showToast(`✅ ¡Pago confirmado con ${method}! Recibirás los archivos en tu correo.`);
+      // Save order data before clearing cart
+      const orderItems = cart.map(c => {
+        const p = products.find(pr => pr.id === c.id);
+        return { name: p.name, price: p.price, qty: c.qty, downloadUrl: p.downloadUrl || '' };
+      });
+      const subtotal = orderItems.reduce((s, item) => s + item.price * item.qty, 0);
+      const tax = subtotal * 0.07;
+      const total = subtotal + tax;
+      const orderNum = 'ASP-' + Math.random().toString(36).substring(2, 7).toUpperCase();
+      
+      lastOrder = { items: orderItems, method, orderNum, subtotal, tax, total, date: new Date() };
+      
+      // Clear cart
       cart = [];
       updateCartCount();
-      setTimeout(() => showView('store'), 2500);
+      
+      // Show thank you
+      showView('thankyou');
+      renderThankYou();
+    }
+
+    function renderThankYou() {
+      if (!lastOrder) { showView('store'); return; }
+      const o = lastOrder;
+      document.getElementById('thankyouContent').innerHTML = `
+        <div class="thankyou-icon">✓</div>
+        <h1>¡Gracias por tu <strong>compra</strong>!</h1>
+        <p class="thankyou-subtitle">Tu pedido ha sido procesado exitosamente. A continuación encontrarás tus descargas.</p>
+        
+        <div class="order-info">
+          <div class="order-info-header">
+            <div class="order-number">Orden: <span>${o.orderNum}</span></div>
+            <div class="order-method">Pagado con: <span>${o.method}</span></div>
+          </div>
+          <div class="order-items">
+            ${o.items.map(item => `
+              <div class="order-item">
+                <span class="order-item-name">${item.name} ${item.qty > 1 ? '×' + item.qty : ''}</span>
+                <span class="order-item-price">${item.price === 0 ? 'Gratis' : '$' + (item.price * item.qty).toFixed(2)}</span>
+              </div>
+            `).join('')}
+          </div>
+          <div class="order-total">
+            <span>Subtotal</span><span>$${o.subtotal.toFixed(2)}</span>
+          </div>
+          <div class="order-item" style="margin-top:8px;">
+            <span class="order-item-name" style="font-size:12px;color:var(--text-muted);">ITBMS (7%)</span>
+            <span style="font-size:12px;color:var(--text-muted);">$${o.tax.toFixed(2)}</span>
+          </div>
+          <div class="order-total" style="margin-top:8px;">
+            <span>Total Pagado</span><span>$${o.total.toFixed(2)}</span>
+          </div>
+        </div>
+
+        <div class="download-section">
+          <h3>📥 Tus Descargas</h3>
+          ${o.items.map(item => `
+            <div class="download-card">
+              <div class="download-card-info">
+                <div class="download-card-icon">📦</div>
+                <div>
+                  <div class="download-card-name">${item.name}</div>
+                  <div class="download-card-type">Archivo ZIP • Descarga directa</div>
+                </div>
+              </div>
+              ${item.downloadUrl ? 
+                `<a href="${item.downloadUrl}" target="_blank" class="btn-download">⬇ Descargar ZIP</a>` :
+                `<span style="font-size:11px;color:var(--text-muted);padding:10px;">Enlace no disponible</span>`
+              }
+            </div>
+          `).join('')}
+        </div>
+
+        <div class="download-note">
+          Los enlaces de descarga estarán disponibles por 72 horas.<br>
+          También recibirás un correo electrónico con los enlaces de descarga.<br>
+          ¿Problemas? Contáctanos en <a href="mailto:soporte@andressuarez.com">soporte@andressuarez.com</a>
+        </div>
+
+        <button class="btn-back-store" onclick="showView('store')">← Volver a la tienda</button>
+      `;
     }
 
     // ═══ ADMIN ═══
@@ -1739,7 +2211,7 @@
               <td><div class="prod-cell"><div class="prod-thumb">${p.cat.substring(0,3).toUpperCase()}</div><span class="prod-name">${p.name}</span></div></td>
               <td style="text-transform:capitalize;">${p.cat}</td>
               <td>${fmt(p.price)}${p.oldPrice ? ` <span style="color:var(--text-muted);text-decoration:line-through;font-size:11px;">${fmt(p.oldPrice)}</span>` : ''}</td>
-              <td><span class="status-badge ${p.status==='active'?'status-active':'status-draft'}">${p.status==='active'?'Publicado':'Borrador'}</span></td>
+              <td><span class="status-badge ${p.status==='active'?'status-active':'status-draft'}">${p.status==='active'?'Publicado':'Borrador'}</span>${p.downloadUrl ? ' <span style="font-size:10px;color:var(--green);" title="Descarga configurada">📦</span>' : ''}</td>
               <td>
                 <div class="admin-actions">
                   <button class="btn-edit" onclick="openAdminModal(${p.id})">Editar</button>
@@ -1808,6 +2280,51 @@
           </div>
           <div class="form-group"><label>Features (separar con |)</label><input id="adm_features" value="${p ? p.features.join('|') : ''}" placeholder="Feature 1|Feature 2|Feature 3" /></div>
         </div>
+        <div class="form-row full">
+          <div class="form-group">
+            <label>🖼️ Imagen de Preview (principal)</label>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <div id="adm_preview_thumb" style="width:64px;height:48px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
+                ${p && p.images && p.images[0] ? `<img src="${p.images[0]}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='📷'" />` : '📷'}
+              </div>
+              <input id="adm_preview_img" value="${p && p.images && p.images[0] ? p.images[0] : ''}" placeholder="URL o sube un archivo..." style="flex:1;" oninput="updatePreviewThumb()" />
+              <label style="background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:13px;white-space:nowrap;margin:0;">
+                📁 Subir
+                <input type="file" accept="image/*" onchange="handlePreviewUpload(this)" style="display:none;" />
+              </label>
+            </div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Pega una URL o sube un archivo de imagen (JPG, PNG, WebP)</div>
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group">
+            <label>📸 Imágenes del Carrusel</label>
+            <div id="adm_gallery_list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px;">
+              ${p && p.images && p.images.length > 1 ? p.images.slice(1).map((img, i) => `
+                <div class="gallery-row" style="display:flex;gap:8px;align-items:center;">
+                  <div class="gallery-thumb" style="width:48px;height:36px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);overflow:hidden;flex-shrink:0;">
+                    <img src="${img}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='📷'" />
+                  </div>
+                  <input class="adm_gallery_input" value="${img}" style="flex:1;" placeholder="URL o sube un archivo..." oninput="updateGalleryThumb(this)" />
+                  <label style="background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid rgba(201,168,76,0.3);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px;margin:0;flex-shrink:0;">
+                    📁<input type="file" accept="image/*" onchange="handleGalleryUpload(this)" style="display:none;" />
+                  </label>
+                  <button onclick="this.parentElement.remove()" style="background:rgba(255,60,60,0.15);color:#ff4444;border:1px solid rgba(255,60,60,0.3);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:13px;flex-shrink:0;" title="Eliminar">✕</button>
+                </div>`).join('') : ''}
+            </div>
+            <button onclick="addGalleryRow()" type="button" style="background:rgba(201,168,76,0.1);color:var(--gold);border:1px dashed var(--gold);border-radius:8px;padding:8px 16px;cursor:pointer;font-size:13px;width:100%;">
+              + Agregar imagen al carrusel
+            </button>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Sube archivos (JPG, PNG, WebP · máx 5MB) o pega URLs · Recomendado: 3-5 imágenes</div>
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group">
+            <label>URL de Descarga (ZIP)</label>
+            <input id="adm_downloadurl" value="${p ? (p.downloadUrl || '') : ''}" placeholder="https://drive.google.com/uc?export=download&id=TU_FILE_ID" />
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Pega el enlace directo de descarga del archivo ZIP (Google Drive, Dropbox, etc.)</div>
+          </div>
+        </div>
         <div style="display:flex;gap:12px;margin-top:24px;">
           <button class="btn-admin" onclick="saveProduct(${p ? p.id : 'null'})">${isNew ? 'Crear Producto' : 'Guardar Cambios'}</button>
           <button class="btn-admin-outline" onclick="closeAdminModal(null,true)">Cancelar</button>
@@ -1818,6 +2335,72 @@
     function closeAdminModal(e, force) {
       if (force || (e && e.target === document.getElementById('adminModalOverlay')))
         document.getElementById('adminModalOverlay').classList.remove('active');
+    }
+
+    function addGalleryRow(url) {
+      const list = document.getElementById('adm_gallery_list');
+      const row = document.createElement('div');
+      row.className = 'gallery-row';
+      row.style.cssText = 'display:flex;gap:8px;align-items:center;';
+      const isData = url && url.startsWith('data:');
+      row.innerHTML = `
+        <div class="gallery-thumb" style="width:48px;height:36px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);overflow:hidden;flex-shrink:0;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;">
+          ${url ? `<img src="${url}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='📷'" />` : '📷'}
+        </div>
+        <input class="adm_gallery_input" value="${url || ''}" style="flex:1;" placeholder="URL o sube un archivo..." oninput="updateGalleryThumb(this)" />
+        <label style="background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid rgba(201,168,76,0.3);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:12px;margin:0;flex-shrink:0;">
+          📁<input type="file" accept="image/*" onchange="handleGalleryUpload(this)" style="display:none;" />
+        </label>
+        <button onclick="this.parentElement.remove()" style="background:rgba(255,60,60,0.15);color:#ff4444;border:1px solid rgba(255,60,60,0.3);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:13px;flex-shrink:0;" title="Eliminar">✕</button>`;
+      list.appendChild(row);
+    }
+
+    function updateGalleryThumb(input) {
+      const thumbDiv = input.parentElement.querySelector('.gallery-thumb');
+      if (thumbDiv && input.value.trim()) {
+        thumbDiv.innerHTML = `<img src="${input.value.trim()}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='📷'" />`;
+      }
+    }
+
+    function updatePreviewThumb() {
+      const input = document.getElementById('adm_preview_img');
+      const thumb = document.getElementById('adm_preview_thumb');
+      if (input.value.trim()) {
+        thumb.innerHTML = `<img src="${input.value.trim()}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='📷'" />`;
+      } else {
+        thumb.innerHTML = '📷';
+      }
+    }
+
+    function handlePreviewUpload(fileInput) {
+      const file = fileInput.files[0];
+      if (!file) return;
+      if (file.size > 5 * 1024 * 1024) { showToast('⚠️ Imagen muy grande (máx 5MB)', 3000); return; }
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64 = e.target.result;
+        document.getElementById('adm_preview_img').value = base64;
+        document.getElementById('adm_preview_thumb').innerHTML = `<img src="${base64}" style="width:100%;height:100%;object-fit:cover;" />`;
+        showToast('✅ Imagen cargada: ' + file.name);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleGalleryUpload(fileInput) {
+      const file = fileInput.files[0];
+      if (!file) return;
+      if (file.size > 5 * 1024 * 1024) { showToast('⚠️ Imagen muy grande (máx 5MB)', 3000); return; }
+      const reader = new FileReader();
+      const row = fileInput.closest('.gallery-row');
+      reader.onload = function(e) {
+        const base64 = e.target.result;
+        const input = row.querySelector('.adm_gallery_input');
+        input.value = base64;
+        const thumbDiv = row.querySelector('.gallery-thumb');
+        thumbDiv.innerHTML = `<img src="${base64}" style="width:100%;height:100%;object-fit:cover;" />`;
+        showToast('✅ Imagen cargada: ' + file.name);
+      };
+      reader.readAsDataURL(file);
     }
 
     function saveProduct(id) {
@@ -1836,8 +2419,14 @@
         badge: document.getElementById('adm_badge').value || null,
         status: document.getElementById('adm_status').value,
         features: document.getElementById('adm_features').value.split('|').map(f=>f.trim()).filter(Boolean),
+        downloadUrl: document.getElementById('adm_downloadurl').value.trim() || null,
         glow: colors.glow, accent: colors.accent,
       };
+      // Collect images
+      const previewImg = document.getElementById('adm_preview_img').value.trim();
+      const galleryInputs = document.querySelectorAll('.adm_gallery_input');
+      const galleryImgs = Array.from(galleryInputs).map(inp => inp.value.trim()).filter(Boolean);
+      data.images = previewImg ? [previewImg, ...galleryImgs] : galleryImgs.length ? galleryImgs : [];
 
       if (id) {
         const p = products.find(pr => pr.id === id);
